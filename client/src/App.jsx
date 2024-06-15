@@ -1,8 +1,11 @@
 import React from 'react';
+import Profile from '../pages/Profile';
 
 const App = () => {
     return (
-        <div>Test</div>
+        <div>
+            <Profile />
+        </div>
     )
 }
 
