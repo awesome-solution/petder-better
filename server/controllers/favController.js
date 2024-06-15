@@ -47,8 +47,13 @@ favController.getFavoritePets = async (req, res, next) => {
   const { userID } = req.body;
 
   const text = `
-  Select JSON_AGG(pet_id) FROM favoritepets
-  WHERE user_id = $1`;
+  Select JSON_AGG(up.user_id, p.*, br.*, sp.*) 
+  FROM favoritepets f
+  LEFT JOIN userpets up ON f.pet_id = up.pet_id
+  LEFT JOIN pets p ON f.pets_id = p.id
+  LEFT JOIN breeds br ON p.breed_id = br.id
+  LEFT JOIN species sp ON br.species_id = sp.id
+  WHERE f.user_id = $1`;
   const values = [userID];
 
   try {
@@ -68,8 +73,13 @@ favController.getDislikedPets = async (req, res, next) => {
   const { userID } = req.body;
 
   const text = `
-  Select JSON_AGG(pet_id) FROM dislikedpets
-  WHERE user_id = $1`;
+  Select JSON_AGG(up.user_id, p.*, br.*, sp.*) 
+  FROM dislikedpets f
+  LEFT JOIN userpets up ON f.pet_id = up.pet_id
+  LEFT JOIN pets p ON f.pets_id = p.id
+  LEFT JOIN breeds br ON p.breed_id = br.id
+  LEFT JOIN species sp ON br.species_id = sp.id
+  WHERE f.user_id = $1`;
   const values = [userID];
 
   try {
