@@ -16,7 +16,7 @@ import Favorite from '../pages/Favorite';
 
 const App = () => {
     return (
-        <Provider>
+        <Provider store={store}>
             <Navbar />
             <Routes>
                 <Route path="/" element={<LoginSignup />}/>
