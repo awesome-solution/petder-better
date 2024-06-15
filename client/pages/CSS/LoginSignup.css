@@ -1,5 +1,5 @@
 body {
-    background: url("../../public/dog2.jpg");
+    background: url("../../public/dog.jpg");
     background-size: cover;
     background-repeat: none;
     background-attachment: fixed;
@@ -32,12 +32,21 @@ body {
     flex-direction: column;
 }
 
+.oneLine {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
 .top span {
     color: #45b3e7;
     font-size: small;
     padding: 10px 0;
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
 
 .top span a{
@@ -72,7 +81,7 @@ header {
     color: black;
 }
 
-.submit {
+#submit {
     font-size: 15px;
     font-weight: 500;
     color: black;
@@ -84,7 +93,11 @@ header {
     cursor: pointer;
 }
 
-.submit:hover{
+#submit:hover{
     background:#89cff0;
     transition: .2s ease;
+}
+
+.error-message {
+    padding-bottom: 10px;
 }
