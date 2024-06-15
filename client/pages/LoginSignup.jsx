@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './CSS/LoginSignup.css';
 import { useSelector, useDispatch } from 'react-redux'; 
-import { setAuthView, loginSuccess, signupSuccess } from '../../src/Redux/action';
+import { setAuthView, loginSuccess, signupSuccess } from '../src/Redux/action';
 
 
 const LoginSignup = () => {
@@ -81,19 +81,17 @@ const LoginSignup = () => {
                         <div className="top">
                             <div className="oneLine">
                                 <p>Already Have an account</p>
-                                <span onClick={()=>{setState("Login")}}>Login</span>
+                                <span onClick={()=>{dispatch(setAuthView("Login"))}}>Login</span>
                             </div>
                             <header>Sign Up</header>
                         </div>
-                        ):(
-                        <div className="top">
-                            <div className="oneLine">
-                                <p>Create a new Account</p>
-                                <span onClick={()=>{setState("SignUp")}}>Sign Up</span>
-                            </div>
-                            <header>Login</header>
+                        ):(<div className="top">
+                        <div className="oneLine">
+                            <p>Create a new Account</p>
+                            <span onClick={()=>{dispatch(setAuthView("SignUp"))}}>Sign Up</span>
                         </div>
-                        )}
+                        <header>Login</header>
+                        </div>)}
                         
                     <div className="input-box">
                         <input 
@@ -104,7 +102,7 @@ const LoginSignup = () => {
                         value={formData.username} 
                         onChange={changeHandler}/>
                     </div>
-                    {state == "SignUp"?(
+                    {authView == "SignUp"?(
                         <div className="input-box">
                         <input 
                         type="text" 
@@ -130,8 +128,13 @@ const LoginSignup = () => {
                     )}
 
                     <button className="input-box" id="submit" onClick={() => {
-                        state == "SignUp" ? Signup() : login();
+                        authView == "SignUp" ? Signup() : login();
                     }}>Continue</button>
+
+                    <div className="loginsignup-agree">
+                        <input type="checkbox" name="" id="" />
+                        <p>By Continuing, I agree to the terms of the use & privacy policy</p>
+                    </div>
                 </div>
             </div>
         </div> 
