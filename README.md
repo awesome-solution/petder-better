@@ -1,5 +1,5 @@
 # Petder Better
-> A dating app for pet lovers to connect and find companionship for their pets.
+> A dating web application for pet lovers to connect and find companionship for their pets.
 
 ---
 
