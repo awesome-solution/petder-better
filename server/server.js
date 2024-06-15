@@ -39,7 +39,17 @@ app.get('/favorite', favController.getFavoritePets, (req, res) => {
   return res.status(200).send(res.locals.result);
 });
 
-app.get('/dislike', favController.getFavoritePets, (req, res) => {
+app.get('/dislike', favController.getDislikedPets, (req, res) => {
+  console.log('RESULT: ', res.locals.result);
+  return res.status(200).send(res.locals.result);
+});
+
+app.delete('/favorite', favController.deleteFavoritePet, (req, res) => {
+  console.log('RESULT: ', res.locals.result);
+  return res.status(200).send(res.locals.result);
+});
+
+app.delete('/dislike', favController.deleteDislikedPet, (req, res) => {
   console.log('RESULT: ', res.locals.result);
   return res.status(200).send(res.locals.result);
 });

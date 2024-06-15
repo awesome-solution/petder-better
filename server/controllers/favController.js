@@ -85,4 +85,48 @@ favController.getDislikedPets = async (req, res, next) => {
   }
 };
 
+favController.deleteFavoritePet = async (req, res, next) => {
+  const { userID, petID } = req.body;
+
+  const text = `
+  DELETE FROM favoritepets
+  WHERE user_id = $1 AND pet_id = $2
+  RETURNING JSON_AGG(*)`;
+  const values = [userID, petID];
+
+  try {
+    const result = await db.query(text, values);
+    res.locals.result = result;
+    next();
+  } catch (err) {
+    next({
+      log: 'Delete Favorite Pet Error',
+      status: 400,
+      message: { err: err.message },
+    });
+  }
+};
+
+favController.deleteDislikedPet = async (req, res, next) => {
+  const { userID, petID } = req.body;
+
+  const text = `
+  DELETE FROM dislikedpets
+  WHERE user_id = $1 AND pet_id = $2
+  RETURNING JSON_AGG(*)`;
+  const values = [userID, petID];
+
+  try {
+    const result = await db.query(text, values);
+    res.locals.result = result;
+    next();
+  } catch (err) {
+    next({
+      log: 'Delete Favorite Pet Error',
+      status: 400,
+      message: { err: err.message },
+    });
+  }
+};
+
 module.exports = favController;
