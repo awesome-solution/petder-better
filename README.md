@@ -36,6 +36,3 @@ Petder Better is a web application designed to help pet owners find suitable com
 ---
 
 
-
-
-#front-end

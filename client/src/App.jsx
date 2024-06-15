@@ -1,4 +1,5 @@
 import React from 'react';
+import Profile from '../pages/Profile';
 import {Route, Routes} from 'react-router-dom';
 import Navbar from '../component/Navbar/Navbar';
 import LoginSignup from '../pages/LoginSignup';
@@ -15,7 +16,7 @@ import Favorite from '../pages/Favorite';
 
 const App = () => {
     return (
-        <Provider store={store}>
+        <Provider>
             <Navbar />
             <Routes>
                 <Route path="/" element={<LoginSignup />}/>
