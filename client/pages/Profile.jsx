@@ -79,6 +79,8 @@ const Profile = () => {
     setImage(e.target.files[0]);
   };
 
+  // endpoint JSON
+  // 
   // <form onSubmit={handleSubmit}>
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
