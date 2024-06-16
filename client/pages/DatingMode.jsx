@@ -5,127 +5,111 @@ import PetProfile from './PetProfile'; // Import PetProfile component
 import UserProfile from './UserProfile'; // Import UserProfile component
 
 const DatingMode = () => {
-    const [pet, setPet] = useState({
-        name: '',
-        age: '',
-        color: '',
-        size: '',
-        species_id: '',
-        breed_id: '',
-        gender: '',
-        neutering: false,
-        medical_records: '',
-        picture: '',
-        description: '',
-    });
-
-    const [picture, setPicture] = useState(null);
-    const [preview, setPreview] = useState(null);
-
-    const [user, setUser] = useState({
-        username: '',
-        email: '',
-    });
-
-    const [editing, setEditing] = useState(false);
-    const [newUserData, setNewUserData] = useState({});
+    const [petProfiles, setPetProfiles] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchedUser = {
-            username: 'example_user', // Replace with actual fetched data after login
-            email: 'example@example.com', // Replace with actual fetched data after login
+        // Fetch pet profiles from the API
+        const fetchPets = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get('http://localhost:3000/api/potential-pets'); // Make sure the endpoint is correct
+                setPetProfiles(response.data);
+                setError(null);
+            } catch (error) {
+                console.error('Error fetching pet profiles:', error);
+                //setError('Failed to fetch pet profiles.');
+            }
+            setLoading(false);
         };
-        setUser(fetchedUser);
+
+        fetchPets();
     }, []);
 
-    const handleEdit = () => {
-        setEditing(true);
-        setNewUserData({ ...user });
+    const handleNextProfile = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % petProfiles.length);
     };
 
-    const handleCancelEdit = () => {
-        setEditing(false);
-        setNewUserData({});
+    const handlePreviousProfile = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + petProfiles.length) % petProfiles.length);
     };
 
-    const handleSave = () => {
-        setUser({ ...newUserData });
-        setEditing(false);
-    };
+    // const handleLike = async () => {
+    //     try {
+    //         const response = await axios.post('/api/like', { petId: petProfiles[currentIndex].id });
+    //         console.log('Liked:', response.data);
+    //         handleNextProfile();
+    //     } catch (error) {
+    //         console.error('Error liking profile:', error);
+    //     }
+    // };
 
-    const handleDelete = () => {
-        setUser({
-            username: '',
-            email: '',
-        });
-    };
+    // like
+    // const handleLike = async () => {
+    //     try {
+    //         // Assuming `userId` is available in the component's state or from a global state/store
+    //         const userId = 'currentUser_Id'; // This should come from user authentication context or state
+    //         const petId = petProfiles[currentIndex].id;
+    //         const response = await axios.post('/api/favorite', { userID: userId, petID: petId });
+    
+    //         console.log('Favorite added:', response.data);
+    //         handleNextProfile();
+    //     } catch (error) {
+    //         console.error('Error adding favorite:', error);
+    //     }
+    // };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewUserData({ ...newUserData, [name]: value });
-    };
+    // //unlike
+    // const handleUnlike = async () => {
+    //     try {
+    //         const response = await axios.post('/api/unlike', { petId: petProfiles[currentIndex].id });
+    //         console.log('Unliked:', response.data);
+    //         handleNextProfile();
+    //     } catch (error) {
+    //         console.error('Error unliking profile:', error);
+    //     }
+    // };
 
-    const handleImageChange = (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setPicture(e.target.files[0]);
-        }
-    };
-
-    useEffect(() => {
-        if (!picture) {
-            setPreview(undefined);
-            return;
-        }
-
-        const objectUrl = URL.createObjectURL(picture);
-        setPreview(objectUrl);
-
-        return () => URL.revokeObjectURL(objectUrl);
-    }, [picture]);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        formData.append('image', picture);
-        Object.keys(pet).forEach(key => formData.append(key, pet[key]));
-
-        axios.post('/api/pets/create', formData)
-            .then(response => {
-                console.log(response.data);
-                if (response.data.picture) {
-                    setPet({ ...pet, picture: response.data.picture });
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    };
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>{error}</p>;
 
     return (
-        <div className="profile-container">
-            <div className="pet-profile">
-                <PetProfile
-                    pet={pet}
-                    picture={picture}
-                    preview={preview}
-                    handleInputChange={handleInputChange}
-                    handleImageChange={handleImageChange}
-                    handleSubmit={handleSubmit}
-                />
-            </div>
-            <div className="user-profile">
-                <UserProfile
-                    user={user}
-                    editing={editing}
-                    newUserData={newUserData}
-                    handleInputChange={handleInputChange}
-                    handleEdit={handleEdit}
-                    handleCancelEdit={handleCancelEdit}
-                    handleSave={handleSave}
-                    handleDelete={handleDelete}
-                />
-            </div>
+        <div className="dating-container">
+            <h2>Click Like To Chat With Me?</h2>
+            {petProfiles.length > 0 ? (
+                <>
+                    <div className="pet-card">
+                        <div className="pet-profile">
+                            <img src={petProfiles[currentIndex].picture} alt={petProfiles[currentIndex].name} />
+                            <h3>{petProfiles[currentIndex].name}</h3>
+                            <p>Age: {petProfiles[currentIndex].age}</p>
+                            <p>Color: {petProfiles[currentIndex].color}</p>
+                            <p>Weight: {petProfiles[currentIndex].size}</p>
+                            <p>Species: {petProfiles[currentIndex].species_id}</p>
+                            <p>Breeds: {petProfiles[currentIndex].breed_id}</p>
+                            <p>Gender: {petProfiles[currentIndex].gender}</p>
+                            <p>Location: {petProfiles[currentIndex].location}</p>
+                            <p>Neutered: {petProfiles[currentIndex].neutering}</p>
+                            <p>Medical Records: {petProfiles[currentIndex].medical_records}</p>
+                            <p>Description: {petProfiles[currentIndex].description}</p>
+                        </div>
+                        <div className="profile-buttons">
+                            <button onClick={handleLike} className="like-btn">Like</button>
+                            <button onClick={handleUnlike} className="unlike-btn">Unlike</button>
+                        </div>
+                    </div>
+                    <div className="navigation-buttons">
+                        <button className="prev" onClick={handlePreviousProfile} disabled={currentIndex === 0}>Previous</button>
+                        <button className="next" onClick={handleNextProfile} disabled={currentIndex === petProfiles.length - 1}>Next</button>
+                    </div>
+                </>
+            ) : (
+                <p>No pet profiles available</p>
+            )}
         </div>
     );
-}
+};
 
 export default DatingMode;
