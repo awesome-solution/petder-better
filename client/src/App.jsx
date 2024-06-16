@@ -1,5 +1,6 @@
 import React from 'react';
 import Profile from '../pages/Profile';
+import DatingMode from '../pages/DatingMode';
 import {Route, Routes} from 'react-router-dom';
 import Navbar from '../component/Navbar/Navbar';
 import LoginSignup from '../pages/LoginSignup';
@@ -21,6 +22,7 @@ const App = () => {
                 <Route path="/" element={<LoginSignup />}/>
                 <Route path='/favorite' element={<Favorite />} />
                 <Route path='/profile' element={<Profile />} />
+                <Route path='/datingmode' element={<DatingMode />} />
             </Routes>
         </Provider>
     )
