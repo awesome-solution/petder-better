@@ -18,12 +18,12 @@ const authController = {
   },
 
   createUser: async (req, res, next) => {
-    const { username, password } = req.body;
-    if(!username || !password || username.trim() === '' || password.trim() === '') return next({
+    const { username, email, password } = req.body;
+    if(!username || !password || !email || username.trim() === '' || password.trim() === ''|| email.trim()) return next({
       log: 'Error with signup',
-      message: { err: 'username or password cannot be empty' },
+      message: { err: 'All feilds have to fill up' },
     })
-    const createUser = `INSERT INTO bu (un, pw) VALUES ('${username}', '${password}')`
+    const createUser = `INSERT INTO User (username, email, password) VALUES ('${username}', '${email}', '${password}')`
     const getUser = `SELECT * FROM bu WHERE un = '${username}'`
     const check = await db.query(getUser)
     if(check.rows.length) return next({
@@ -33,10 +33,6 @@ const authController = {
     db.query(createUser)
       .then(data => {
         console.log(data.rows)
-        // if(!data.rows.length) return next({
-        //   log: 'Error with signup',
-        //   message: { err: 'Error with username or password' },
-        // })
         return next()
       })
       .catch(err => {
