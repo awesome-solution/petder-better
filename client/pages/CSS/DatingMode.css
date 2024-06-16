@@ -1,0 +1,91 @@
+.dating-container {
+  display: flex;
+  flex-direction: column;
+  /*align-items: center; */
+  justify-content: center; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); 
+  width: 80%; 
+  max-width: 700px; 
+  height: auto;
+  margin: 50px auto; 
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(230, 240, 250, 0.9)); 
+  border-radius: 15px; 
+  padding: 30px; 
+  font-family: 'Roboto Mono', monospace;
+  transition: all 0.3s ease-in-out; 
+  margin-top: 180px;
+}
+
+.dating-container:hover {
+  transform: scale(1.02); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 12px 40px rgba(0, 0, 0, 0.1); 
+}
+
+.profile-buttons {
+    display: flex;
+    justify-content: center; 
+  }
+
+.like-btn, .unlike-btn {
+    padding: 10px 20px; 
+    font-size: 16px; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    font-weight: bold; 
+    border: none; 
+    cursor: pointer; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+  
+  .like-btn {
+    background-color: #4396A3; 
+    color: white; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  .like-btn:hover {
+    background-color: #2c7a92; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3); 
+  }
+  
+  .unlike-btn {
+    background-color: #f44336; 
+    color: white; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  .unlike-btn:hover {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3); 
+  }
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 10px; 
+}
+
+.prev, .next {
+    flex: 1; 
+    text-align: center; 
+}
+
+/*
+.prev {
+}
+.next {
+}
+*/
+
+@media (max-width: 1024px) {
+  .dating-container {
+    width: 90%;
+    margin: 180px auto;
+    padding: 10px;
+  }
+}

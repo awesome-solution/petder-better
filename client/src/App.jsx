@@ -6,6 +6,7 @@ import LoginSignup from '../pages/LoginSignup';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 import Favorite from '../pages/Favorite';
+import DatingMode from '../pages/DatingMode';
 
 
 // path to Fav
@@ -14,20 +15,22 @@ import Favorite from '../pages/Favorite';
 // Path to Profile after finished signup page (Registered button was clicked)
     // and everytime when the profile picture was clicked
 
+    //<DatingMode />
+   // <Profile />
 const App = () => {
     return (
         <Provider store={store}>
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<LoginSignup />}/>
-                <Route path='/favorite' element={<Favorite />} />
-            </Routes>
+               <Navbar />
+               <Profile />
         </Provider>
     )
 }
 {/* <Navbar />
-            <Routes>
-                <Route path="/" element={<LoginSignup />}/>
+                    <Routes>
+            <Route path="/" element={<LoginSignup />} />
+            <Route path="/profile" element={<Profile />}/>
+            <Route path='/favorite' element={<Favorite />} />
+            <Route path='/dating' element={<DatingMode />} />
             </Routes> */}
 
 export default App;

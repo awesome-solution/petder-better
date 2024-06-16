@@ -1,16 +1,49 @@
+
 const db = require('../db.js')
+const bcrypt = require('bcrypt')
+
+const saltRounds = 10
+
 const authController = {
 
-  getUser: (req, res, next) => {
-    const { email, password } = req.body;
-    const getUser = `SELECT * FROM Users WHERE email = '${email}' AND password = '${password}'`
+  getUser: async (req, res, next) => {
+    const { username, password } = req.body;
+    const getUser = `SELECT * FROM users WHERE username = '${username}'`
     db.query(getUser)
       .then(data => {
+        console.log('data', data);
         if(!data.rows.length) return next({
           log: 'Error with login',
-          message: { err: 'Error with username or password' },
+          message: { err: 'Error with username' },
         })
-        return next()
+        else {
+         bcrypt.compare(password, data.rows[0].password)
+          .then((result) => {
+            console.log('result', result);
+            if(!result) {
+              return next({
+                log: 'Error with login',
+                message: { err: 'Password is incorrect' },
+              })
+            }
+            res.locals.user = {
+              success: true,
+              message: 'login successfully',
+              data: {
+                userId: data.rows[0].id,
+                username: data.rows[0].username
+              }
+            }
+            
+            return next();
+          })
+          .catch(err => {
+            return next({
+              log: 'Error occured in getting user information',
+              message: { err: 'An error occurred'},
+            })
+          })
+        }
       })
       .catch(err => {
         return next(err)
@@ -19,28 +52,29 @@ const authController = {
 
   createUser: async (req, res, next) => {
     const { username, email, password } = req.body;
-    if(!username || !password || !email || username.trim() === '' || password.trim() === ''|| email.trim()) return next({
+    if(!username || !password || !email || username.trim() === '' || password.trim() === '' || email.trim() === '') return next({
       log: 'Error with signup',
       message: { err: 'All feilds have to fill up' },
     })
-    const createUser = `INSERT INTO User (username, email, password) VALUES ('${username}', '${email}', '${password}')`
-    const getUser = `SELECT * FROM bu WHERE un = '${username}'`
+    const getUser = `SELECT * FROM users WHERE username = '${username}'`
     const check = await db.query(getUser)
     if(check.rows.length) return next({
       log: 'Error with signup',
       message: { err: 'username exists' },
     })
+    const hashedPassword = await bcrypt.hash(password, saltRounds)
+    const createUser = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${hashedPassword}')`
     db.query(createUser)
       .then(data => {
-        console.log(data.rows)
+        console.log(data)
+        res.locals.user = data
+        //In the frontend, they are looking for response after signup. But in data.rows, it will not return anything. So I put the whole data in return 
         return next()
       })
       .catch(err => {
         return next(err)
       })
   },
-
 }
-
 
 module.exports = authController;
