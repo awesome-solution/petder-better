@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import store from './Redux/store';
 import Favorite from '../pages/Favorite';
 
-
 // path to Fav
 // path to Search
 // Path to Dating Mode
@@ -21,13 +20,10 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<LoginSignup />}/>
                 <Route path='/favorite' element={<Favorite />} />
+                <Route path='/profile' element={<Profile />} />
             </Routes>
         </Provider>
     )
 }
-{/* <Navbar />
-            <Routes>
-                <Route path="/" element={<LoginSignup />}/>
-            </Routes> */}
 
 export default App;

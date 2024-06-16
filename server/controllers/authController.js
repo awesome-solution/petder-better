@@ -10,6 +10,7 @@ const authController = {
     const getUser = `SELECT * FROM users WHERE username = '${username}'`
     db.query(getUser)
       .then(data => {
+        console.log('data', data);
         if(!data.rows.length) return next({
           log: 'Error with login',
           message: { err: 'Error with username' },
@@ -17,14 +18,23 @@ const authController = {
         else {
          bcrypt.compare(password, data.rows[0].password)
           .then((result) => {
+            console.log('result', result);
             if(!result) {
               return next({
                 log: 'Error with login',
                 message: { err: 'Password is incorrect' },
               })
             }
-            res.locals.user = data.rows[0]
-            return next()
+            res.locals.user = {
+              success: true,
+              message: 'login successfully',
+              data: {
+                userId: data.rows[0].id,
+                username: data.rows[0].username
+              }
+            }
+            
+            return next();
           })
           .catch(err => {
             return next({

@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const db = require('./db');
+const cors = require('cors');
 
 const userProfileController = require('./controllers/userProfileController');
 const petProfileController = require('./controllers/petProfileController');
@@ -10,6 +11,13 @@ const favController = require('./controllers/favController');
 
 const PORT = 3000;
 const app = express();
+
+const corsOptions = {
+  origin: 'http://localhost:8080',
+  optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,6 +39,7 @@ app.get('/', (req, res) => {
 
 //apiRouter? frontend using http://localhost:3000/api/signup
 apiRouter.post('/login', authController.getUser, (req, res) => {
+  console.log('res.locals.user: ', res.locals.user);
   return res.status(200).json(res.locals.user)
 })
 
