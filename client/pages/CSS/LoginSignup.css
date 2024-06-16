@@ -1,9 +1,5 @@
 body {
-<<<<<<< HEAD
-    background: url("../../public/dog2.jpg");
-=======
     background: url("../../public/dog.jpg");
->>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
     background-size: cover;
     background-repeat: none;
     background-attachment: fixed;
@@ -36,9 +32,6 @@ body {
     flex-direction: column;
 }
 
-<<<<<<< HEAD
-.top span {
-=======
 .oneLine {
     display: flex;
     flex-direction: row;
@@ -49,22 +42,12 @@ body {
 }
 
 .oneLine span {
->>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
     color: #45b3e7;
     font-size: small;
     padding: 10px 0;
     display: flex;
     justify-content: center;
-<<<<<<< HEAD
-}
-
-.top span a{
-    font-weight: 500;
-    color: #45b3e7;
-    margin-left: 5px;
-=======
     cursor: pointer;
->>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
 }
 
 header {
@@ -93,11 +76,7 @@ header {
     color: black;
 }
 
-<<<<<<< HEAD
-.submit {
-=======
 #submit {
->>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
     font-size: 15px;
     font-weight: 500;
     color: black;
@@ -109,11 +88,6 @@ header {
     cursor: pointer;
 }
 
-<<<<<<< HEAD
-.submit:hover{
-    background:#89cff0;
-    transition: .2s ease;
-=======
 #submit:hover{
     background:#89cff0;
     transition: .2s ease;
@@ -152,5 +126,4 @@ header {
     .form-box {
         margin-right: 50px; /* 靠右间距 */
     }
->>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
 }

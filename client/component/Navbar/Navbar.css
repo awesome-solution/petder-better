@@ -7,17 +7,6 @@
     /* font-family: "Poppins", sans-serif; */
     font-family: "Merriweather", serif;
 }
-
-<<<<<<< HEAD
-/* .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 110vh;
-} */
-
-=======
->>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
 .nav {
     position: fixed;
     top: 0;
@@ -86,8 +75,6 @@
 .btn:hover {
     background: #cdebf9;
 }
-<<<<<<< HEAD
-=======
 
 @media (max-width: 670px) {
     .nav-menu ul li {
@@ -159,4 +146,3 @@
         padding: 15px 20px; 
     }
 }
->>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
