@@ -7,13 +7,14 @@ import LoginSignup from '../pages/LoginSignup';
 const App = () => {
     return (
         <div>
-            <Profile />
             <Navbar />
-            <Routes>
-                <Route path="/" element={<LoginSignup />}/>
-            </Routes>
+            <Profile />
         </div>
     )
 }
+{/* <Navbar />
+            <Routes>
+                <Route path="/" element={<LoginSignup />}/>
+            </Routes> */}
 
 export default App;
