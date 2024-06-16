@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './CSS/LoginSignup.css';
+<<<<<<< HEAD
 
 const LoginSignup = () => {
     // const {state, useState} = useState("Login");
@@ -26,11 +27,86 @@ const LoginSignup = () => {
     //         window.location.replace("/profile");
     //     }
     // }
+=======
+import { useSelector, useDispatch } from 'react-redux'; 
+import { setAuthView, loginSuccess, signupSuccess } from '../src/Redux/action';
+
+
+const LoginSignup = () => {
+    const dispatch = useDispatch();
+
+    //get current auth view: "Login or SignUp"
+    const authView = useSelector(state => state.auth.authView);
+
+    // recording state of error
+    const [error, setError] = useState('');
+    // recording formData that will send to server
+    const [formData, setFormData] = useState({
+        "username": "",
+        "password": "",
+        "email": "",
+    });
+
+    const changeHandler = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+    };
+
+    // login
+    const login = async() => {
+        let responseData;
+        await fetch('http://localhost:3000/api/login', {
+            method: "POST",
+            headers:{
+                Accept: "application/form-data",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        })
+        .then((response) => response.json())
+        .then((data) => {responseData = data})
+        .catch(err => {
+            setError('Login failed. Please try again.');  // Handle fetch error
+        });
+
+        if (responseData.success) {
+            window.location.replace("/profile");
+            dispatch(setAuthView(loginSuccess));
+        } else {
+            setError('Invalid username or password.');  // Handle response error
+        }
+    }
+
+    // signup
+    const Signup = async() => {
+        let responseData;
+        await fetch('http://localhost:3000/api/signup', {
+            method: "POST",
+            headers: {
+                Accept: "application/form-data",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        })
+        .then((response) => response.json())
+        .then((data) => {responseData = data})
+        .catch(err => {
+            setError('Signup failed. Please try again.');  // Handle fetch error
+        });
+
+        if (responseData.success) {
+            window.location.replace("/datingMode");
+            dispatch(setAuthView(signupSuccess));
+        }else {
+            setError('Failed to create an account. Please check your details and try again.');  // Handle response error
+        }
+    }
+>>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
 
     return (
         <div className="wrapper">
              <div className="form-box">
                 <div className="register-container" id="register">
+<<<<<<< HEAD
                     <div className="top">
                         <span>Have an account <a>Login</a></span>
                         <header>Sign Up</header>
@@ -51,6 +127,69 @@ const LoginSignup = () => {
             </div>
         </div>
        
+=======
+                        { authView == "SignUp"? (
+                        <div className="top">
+                            <div className="oneLine">
+                                <p>Already Have an account</p>
+                                <span onClick={()=>{dispatch(setAuthView("Login"))}}>Login</span>
+                            </div>
+                            <header>Sign Up</header>
+                        </div>
+                        ):(<div className="top">
+                        <div className="oneLine">
+                            <p>Create a new Account</p>
+                            <span onClick={()=>{dispatch(setAuthView("SignUp"))}}>Sign Up</span>
+                        </div>
+                        <header>Login</header>
+                        </div>)}
+                        
+                    <div className="input-box">
+                        <input 
+                        type="text" 
+                        className="input-field" 
+                        placeholder="Your Name" 
+                        name="username"
+                        value={formData.username} 
+                        onChange={changeHandler}/>
+                    </div>
+                    {authView == "SignUp"?(
+                        <div className="input-box">
+                        <input 
+                        type="text" 
+                        className="input-field" 
+                        placeholder="Email"
+                        name="email"
+                        value={formData.email} 
+                        onChange={changeHandler}/>
+                    </div>
+                    ):(<></>)}
+                    <div className="input-box">
+                        <input type="text" 
+                        className="input-field" 
+                        placeholder="Password"
+                        name="password"
+                        value={formData.password} 
+                        onChange={changeHandler}/>
+                    </div>
+                    {error && (
+                    <div className="error-message" style={{ color: 'red' }}>
+                        {error}
+                    </div>
+                    )}
+
+                    <button className="input-box" id="submit" onClick={() => {
+                        authView == "SignUp" ? Signup() : login();
+                    }}>Continue</button>
+
+                    <div className="loginsignup-agree">
+                        <input type="checkbox" name="" id="" />
+                        <p>By Continuing, I agree to the terms of the use & privacy policy</p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+>>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
     )
 }
 

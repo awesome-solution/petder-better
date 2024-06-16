@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react'; 
 import axios from "axios";
+=======
+import React , { useState } from "react";
+// import axios from "axios";
+>>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
 
 // first need the pet 
 // pet profile
@@ -56,6 +61,7 @@ const Profile = () => {
         // edit category later // add more options to choose in the box better
         // gender and category will be dropdowmn menu
         
+<<<<<<< HEAD
     // function for the setPicture 
         // call to the endpoint 
 
@@ -94,6 +100,9 @@ const Profile = () => {
 //       .catch(error => console.error(error));
 //   };
 
+=======
+        
+>>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
     // function to handle the submitting all the put element
     // passing in event
     // const handleSubmit = (e) => {
@@ -130,7 +139,11 @@ const Profile = () => {
         // image area need to be edited!
         <div className="pet-profile-container">
             <h2 className="pet-profile-header">Pet Profile</h2>
+<<<<<<< HEAD
             <form>
+=======
+            <form onSubmit={handleSubmit}>
+>>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
                 <input type="text" name="name" value={pet.name} placeholder="Pet Name" onChange={handleInputChange}/>
                 <input type="text" name="color" value={pet.color} onChange={handleInputChange} placeholder="Color" />
                 <input type="text" name="size" value={pet.size} onChange={handleInputChange} placeholder="Weight" />
@@ -173,6 +186,10 @@ const Profile = () => {
         </div>
     );
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
 }
 
 

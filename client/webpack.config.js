@@ -23,7 +23,11 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
-      }
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: 'asset/resource' 
+    },
     ]
   },
   plugins: [
@@ -36,12 +40,13 @@ module.exports = {
     hot: true,
     port: 8080,
     proxy: [
-        {
-            context: ['/api'],
-            target: 'http://localhost:3000/',
-            secure: false,
-        }
-    ],
+      {
+          context: ['/api'],
+          target: 'http://localhost:3000',
+          secure: false,
+          changeOrigin: true
+      }
+  ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
