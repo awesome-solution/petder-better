@@ -64,8 +64,6 @@ const authController = {
         return next(err)
       })
   },
-
 }
-
 
 module.exports = authController;
