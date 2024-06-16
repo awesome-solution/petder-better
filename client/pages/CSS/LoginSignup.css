@@ -1,0 +1,90 @@
+body {
+    background: url("../../public/dog2.jpg");
+    background-size: cover;
+    background-repeat: none;
+    background-attachment: fixed;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: end;
+    margin-right: 50px;
+}
+
+.form-box{
+    position:relative;
+    margin-left: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    height: 65vh;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 200px;
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.register-container {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.top span {
+    color: #45b3e7;
+    font-size: small;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.top span a{
+    font-weight: 500;
+    color: #45b3e7;
+    margin-left: 5px;
+}
+
+header {
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    padding: 10px 0 30px 0;
+}
+
+.input-field {
+    font-size: 15px;
+    background:  #e6f1f6;
+    color: black;
+    height: 50px;
+    width: 100%;
+    padding: 0 10px 0 45px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 30px;
+    transition: .2s ease;
+}
+.input-field:hover, .input-field:focus{
+    background:rgba(255, 255, 255, 0.25);
+}
+::-webkit-input-placeholder {
+    color: black;
+}
+
+.submit {
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    height: 45px;
+    width: 100%;
+    border: none;
+    border-radius: 30px;
+    background: #45b3e7;
+    cursor: pointer;
+}
+
+.submit:hover{
+    background:#89cff0;
+    transition: .2s ease;
+}
