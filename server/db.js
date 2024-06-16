@@ -14,7 +14,7 @@ const pool = new Pool({
 pool.connect();
 
 pool.on('connect', (pc) => {
-  console.log('PG CONNECTED');
+  console.log('PG CONNECTED', pc);
 });
 
 // module.exports = pool;

@@ -1,4 +1,8 @@
 /client/node_modules
 /server/node_modules
+<<<<<<< HEAD
+/server/.env
+=======
 package-lock.json
 .env
+>>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1

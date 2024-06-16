@@ -5,6 +5,8 @@ const db = require('./db');
 const userProfileController = require('./controllers/userProfileController');
 const petProfileController = require('./controllers/petProfileController');
 
+const favController = require('./controllers/favController');
+
 const PORT = 3000;
 const app = express();
 
@@ -63,6 +65,36 @@ userRouter.patch('/:user_id',
 //   petProfileController.getPetProfile,
 //   (req, res) => res.status(200).json(res.locals.pet)
 // )
+
+app.post('/favorite', favController.favoritePet, (req, res) => {
+  console.log('RESULT: ', res.locals.result);
+  return res.status(200).send(res.locals.result);
+});
+
+app.post('/dislike', favController.dislikePet, (req, res) => {
+  console.log('RESULT: ', res.locals.result);
+  return res.status(200).send(res.locals.result);
+});
+
+app.get('/favorite', favController.getFavoritePets, (req, res) => {
+  console.log('RESULT: ', res.locals.result);
+  return res.status(200).send(res.locals.result);
+});
+
+app.get('/dislike', favController.getDislikedPets, (req, res) => {
+  console.log('RESULT: ', res.locals.result);
+  return res.status(200).send(res.locals.result);
+});
+
+app.delete('/favorite', favController.deleteFavoritePet, (req, res) => {
+  console.log('RESULT: ', res.locals.result);
+  return res.status(200).send(res.locals.result);
+});
+
+app.delete('/dislike', favController.deleteDislikedPet, (req, res) => {
+  console.log('RESULT: ', res.locals.result);
+  return res.status(200).send(res.locals.result);
+});
 
 app.use((req, res) => res.status(404).send('Page Not Found'));
 
