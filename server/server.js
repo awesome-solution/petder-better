@@ -4,24 +4,40 @@ const db = require('./db');
 
 const userProfileController = require('./controllers/userProfileController');
 const petProfileController = require('./controllers/petProfileController');
-
+const authController = require('./controllers/authController')
 const favController = require('./controllers/favController');
 
 const PORT = 3000;
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded());
-
-app.get('/', (req, res) => {
-  return res.status(200).json({});
-});
+app.use(express.urlencoded({ extended: true }));
 
 const userRouter = express.Router();
 const petRouter = express.Router();
+const apiRouter = express.Router();
 
 app.use('/user', userRouter);
 app.use('/pet', petRouter);
+app.use('/api', apiRouter);
+
+
+app.use('/client', express.static(path.join(__dirname, '../client')));
+
+//trying to connect the frontend html but doesn't work yet
+app.get('/', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../client/src/index.html'));
+})
+
+//apiRouter? frontend using http://localhost:3000/api/signup
+app.post('/login', authController.getUser, (req, res) => {
+  return res.status(200).json(res.locals.user)
+})
+
+//apiRouter? frontend using http://localhost:3000/api/login
+app.post('/signup', authController.createUser, (req, res) => {
+  return res.status(200).json(res.locals.user)
+})
 
 
 // http://localhost:3000/users/
