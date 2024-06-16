@@ -2,8 +2,11 @@ const express = require('express');
 const path = require('path');
 const db = require('./db');
 
+<<<<<<< HEAD
+=======
 const favController = require('./controllers/favController');
 
+>>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
 const PORT = 3000;
 const app = express();
 
@@ -24,6 +27,8 @@ app.get('/users', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
+=======
 app.post('/favorite', favController.favoritePet, (req, res) => {
   console.log('RESULT: ', res.locals.result);
   return res.status(200).send(res.locals.result);
@@ -54,6 +59,7 @@ app.delete('/dislike', favController.deleteDislikedPet, (req, res) => {
   return res.status(200).send(res.locals.result);
 });
 
+>>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
 app.use((req, res) => res.status(404).send('Page Not Found'));
 
 app.use((err, req, res, next) => {

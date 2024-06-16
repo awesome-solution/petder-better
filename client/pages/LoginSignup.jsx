@@ -1,5 +1,33 @@
 import React, {useState, useEffect} from 'react';
 import './CSS/LoginSignup.css';
+<<<<<<< HEAD
+
+const LoginSignup = () => {
+    // const {state, useState} = useState("Login");
+    // const [formData, setFormData] = useState({
+    //     "username": "",
+    //     "password": "",
+    //     "email": "",
+    // });
+
+    // const login = async() => {
+    //     let responseData;
+    //     await fetch("/api/", {
+    //         method: "POST",
+    //         header:{
+    //             Accept: "application/form-data",
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(formData),
+    //     })
+    //     .then((response) => response.json())
+    //     .then((data) => {responseData = data});
+
+    //     if (responseData.success) {
+    //         window.location.replace("/profile");
+    //     }
+    // }
+=======
 import { useSelector, useDispatch } from 'react-redux'; 
 import { setAuthView, loginSuccess, signupSuccess } from '../src/Redux/action';
 
@@ -72,11 +100,34 @@ const LoginSignup = () => {
             setError('Failed to create an account. Please check your details and try again.');  // Handle response error
         }
     }
+>>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
 
     return (
         <div className="wrapper">
              <div className="form-box">
                 <div className="register-container" id="register">
+<<<<<<< HEAD
+                    <div className="top">
+                        <span>Have an account <a>Login</a></span>
+                        <header>Sign Up</header>
+                    </div>
+                    <div className="input-box">
+                        <input type="text" className="input-field" placeholder="Your Name"/>
+                    </div>
+                    <div className="input-box">
+                        <input type="text" className="input-field" placeholder="Email"/>
+                    </div>
+                    <div className="input-box">
+                        <input type="text" className="input-field" placeholder="Password"/>
+                    </div>
+                    <div className="input-box">
+                        <input type="submit" className="submit" value="Register"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+=======
                         { authView == "SignUp"? (
                         <div className="top">
                             <div className="oneLine">
@@ -138,6 +189,7 @@ const LoginSignup = () => {
                 </div>
             </div>
         </div> 
+>>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
     )
 }
 
