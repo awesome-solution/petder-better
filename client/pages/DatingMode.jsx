@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './CSS/DatingMode.css'; 
+// import axios from "axios";
+import './CSS/Profile.css';
+import PetProfile from './PetProfile'; // Import PetProfile component
+import UserProfile from './UserProfile'; // Import UserProfile component
 
 const DatingMode = () => {
     const [petProfiles, setPetProfiles] = useState([]);

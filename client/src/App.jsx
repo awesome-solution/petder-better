@@ -1,12 +1,12 @@
-import React from 'react'
-import Profile from '../pages/Profile'
-import { Route, Routes } from 'react-router-dom'
-import Navbar from '../component/Navbar/Navbar'
-import LoginSignup from '../pages/LoginSignup'
-import { Provider } from 'react-redux'
-import store from './Redux/store'
-import Favorite from '../pages/Favorite'
-import DatingMode from '../pages/DatingMode'
+import React from 'react';
+import Profile from '../pages/Profile';
+import DatingMode from '../pages/DatingMode';
+import {Route, Routes} from 'react-router-dom';
+import Navbar from '../component/Navbar/Navbar';
+import LoginSignup from '../pages/LoginSignup';
+import { Provider } from 'react-redux';
+import store from './Redux/store';
+import Favorite from '../pages/Favorite';
 
 // path to Fav
 // path to Search
@@ -30,7 +30,10 @@ const App = () => {
                 <Route path="/" element={<LoginSignup />}/>
                 <Route path='/favorite' element={<Favorite />} />
                 <Route path='/profile' element={<Profile />} />
-            </Routes> */
+                <Route path='/datingmode' element={<DatingMode />} />
+            </Routes>
+        </Provider>
+    )
 }
 
 export default App
