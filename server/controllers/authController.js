@@ -67,8 +67,10 @@ const authController = {
     db.query(createUser)
       .then(data => {
         console.log(data)
-        res.locals.user = data
-        //In the frontend, they are looking for response after signup. But in data.rows, it will not return anything. So I put the whole data in return 
+        res.locals.user = {
+          success: true,
+          message: 'signup successfully',
+        }
         return next()
       })
       .catch(err => {
