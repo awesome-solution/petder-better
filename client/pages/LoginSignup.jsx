@@ -47,30 +47,34 @@ const LoginSignup = () => {
         } else {
             setError('Invalid username or password.');  // Handle response error
         }
-    }
+    } 
 
     // signup
-    const Signup = async() => {
-        let responseData;
-        await fetch('http://localhost:3000/api/signup', {
-            method: "POST",
-            headers: {
-                Accept: "application/form-data",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        })
-        .then((response) => response.json())
-        .then((data) => {responseData = data})
-        .catch(err => {
-            setError('Signup failed. Please try again.');  // Handle fetch error
-        });
-
-        if (responseData.success) {
-            window.location.replace("/datingMode");
-            dispatch(setAuthView(signupSuccess));
-        }else {
-            setError('Failed to create an account. Please check your details and try again.');  // Handle response error
+    const Signup = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/signup', {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok'); // Throws an error if response is not OK
+            }
+    
+            const responseData = await response.json();
+            if (responseData.success) {
+                window.location.replace("/profile");
+                dispatch(setAuthView(signupSuccess));
+            } else {
+                setError('Failed to create an account. Please check your details and try again.');
+            }
+        } catch (error) {
+            console.error('Signup Error:', error);
+            setError('Signup failed. Please try again.');
         }
     }
 
