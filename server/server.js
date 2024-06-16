@@ -37,13 +37,13 @@ app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../client/src/index.html'));
 })
 
-//apiRouter? frontend using http://localhost:3000/api/signup
+//http://localhost:3000/api/signup
 apiRouter.post('/login', authController.getUser, (req, res) => {
   console.log('res.locals.user: ', res.locals.user);
   return res.status(200).json(res.locals.user)
 })
 
-//apiRouter? frontend using http://localhost:3000/api/login
+//http://localhost:3000/api/login
 apiRouter.post('/signup', authController.createUser, (req, res) => {
   return res.status(200).json(res.locals.user)
 })
