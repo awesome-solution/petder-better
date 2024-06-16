@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'; 
-import axios from "axios";
+import React , { useState } from "react";
+// import axios from "axios";
 
 // first need the pet 
 // pet profile
@@ -56,44 +56,7 @@ const Profile = () => {
         // edit category later // add more options to choose in the box better
         // gender and category will be dropdowmn menu
         
-    // function for the setPicture 
-        // call to the endpoint 
-
-
         
-  useEffect(() => {
-    // Fetch breeds based on species selection
-    if (pet.species_id === '1' || pet.species_id === '2') { // Assuming species_id 1 is Dog and 2 is Cat
-      axios.get(`/api/breeds/${pet.species_id}`)
-        .then(response => setBreeds(response.data))
-        .catch(error => console.error(error));
-    }
-  }, [pet.species_id]); // Triggered when species_id changes
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setPet({ ...pet, [name]: value });
-  };
-
-  const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
-  };
-
-  // endpoint JSON
-  // 
-  // <form onSubmit={handleSubmit}>
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     const formData = new FormData();
-//     formData.append('image', image);
-//     Object.keys(pet).forEach(key => formData.append(key, pet[key]));
-
-//     axios.post('/api/pets/create', formData)
-//       .then(response => console.log(response))
-//       .catch(error => console.error(error));
-//   };
-
     // function to handle the submitting all the put element
     // passing in event
     // const handleSubmit = (e) => {
@@ -130,7 +93,7 @@ const Profile = () => {
         // image area need to be edited!
         <div className="pet-profile-container">
             <h2 className="pet-profile-header">Pet Profile</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input type="text" name="name" value={pet.name} placeholder="Pet Name" onChange={handleInputChange}/>
                 <input type="text" name="color" value={pet.color} onChange={handleInputChange} placeholder="Color" />
                 <input type="text" name="size" value={pet.size} onChange={handleInputChange} placeholder="Weight" />
@@ -172,6 +135,7 @@ const Profile = () => {
             </form>
         </div>
     );
+
 
 }
 
