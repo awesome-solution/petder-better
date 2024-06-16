@@ -1,25 +1,24 @@
-.dropdown {
-    display: inline-block;
-    cursor: pointer;
+* {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+    font-family: "Roboto Mono", monospace;
 }
 
 .dropdown-content {
     position: relative;
     display: flex;
-    /*background-color: #f9f9f9;*/
-    /*box-shadow: 0px 8px 20px 0px rgba(66, 158, 172, 0.859);*/
     z-index: 1;
-    border-radius: 7px;
+    border-radius: 3px;
     width: auto;
     outline: none;
     cursor: pointer;
-    height: 50px;
+    height: 45px;
     font-size: 14px;
-    margin-top: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 10px;
     margin-right: 10px;
-<<<<<<< HEAD
-=======
 }
 /* dropdown option on the gender and species*/
 .dropdown {
@@ -27,20 +26,81 @@
     cursor: pointer;
 }
 
-.dropdown-content {
-    position: relative;
+.pet-profile-container {
     display: flex;
-    /*background-color: #f9f9f9;*/
-    /*box-shadow: 0px 8px 20px 0px rgba(66, 158, 172, 0.859);*/
-    z-index: 1;
-    border-radius: 7px;
-    width: auto;
-    outline: none;
-    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 8px 20px 0px rgba(66, 158, 172, 0.859);
+    width: 700px;
+    height: auto;
+    margin-top: 150px;
+    background-color: rgba(255, 255, 255, 0.884);
+    border-radius: 20px;
+    padding: 20px;
+    margin-left: 200px;
+    font-family: "Roboto Mono", monospace;
+}
+
+.btn-profile {
+    width: 200px;
     height: 50px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 20px 0px rgba(66, 158, 172, 0.859);
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: "Roboto Mono", monospace;
+    border-color: rgba(128, 128, 128, 0.473);
+}
+
+.btn-profile:hover {
+    background-color:  rgba(66, 158, 172, 0.859);
+}
+
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.input-container > * {
+    flex-basis: 48%;
+    margin-bottom: 10px;
+    font-family: "Roboto Mono", monospace;
+}
+
+input {
+    height: 30px;
+    padding: 20px;
     font-size: 14px;
-    margin-top: 40px;
-    padding: 10px;
-    margin-right: 10px;
->>>>>>> b90369d2fe9d3a3375bb5a287b306b473d430ae1
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    outline: none;
+}
+
+.pet-profile-header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: "Roboto Mono", monospace;
+}
+
+#upload-img {
+    border-radius: 5px;
+}
+
+.image-preview, .uploaded-image {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.image-preview img, .uploaded-image img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+}
+
+.delete-btn , .edit-btn {
+    font-family: "Roboto Mono", monospace;
 }
