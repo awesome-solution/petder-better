@@ -26,6 +26,7 @@ const LoginSignup = () => {
     // login
     const login = async() => {
         let responseData;
+        console.log('formData', formData);
         await fetch('http://localhost:3000/api/login', {
             method: "POST",
             headers:{

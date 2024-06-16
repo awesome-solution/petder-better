@@ -13,7 +13,7 @@ const DatingMode = () => {
         const fetchPets = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('/'); // Make sure the endpoint is correct
+                const response = await axios.get('http://localhost:3000/api/potential-pets'); // Make sure the endpoint is correct
                 setPetProfiles(response.data);
                 setError(null);
             } catch (error) {
@@ -44,29 +44,31 @@ const DatingMode = () => {
     //     }
     // };
 
-    const handleLike = async () => {
-        try {
-            // Assuming `userId` is available in the component's state or from a global state/store
-            const userId = 'currentUser_Id'; // This should come from user authentication context or state
-            const petId = petProfiles[currentIndex].id;
-            const response = await axios.post('/api/favorite', { userID: userId, petID: petId });
+    // like
+    // const handleLike = async () => {
+    //     try {
+    //         // Assuming `userId` is available in the component's state or from a global state/store
+    //         const userId = 'currentUser_Id'; // This should come from user authentication context or state
+    //         const petId = petProfiles[currentIndex].id;
+    //         const response = await axios.post('/api/favorite', { userID: userId, petID: petId });
     
-            console.log('Favorite added:', response.data);
-            handleNextProfile();
-        } catch (error) {
-            console.error('Error adding favorite:', error);
-        }
-    };
+    //         console.log('Favorite added:', response.data);
+    //         handleNextProfile();
+    //     } catch (error) {
+    //         console.error('Error adding favorite:', error);
+    //     }
+    // };
 
-    const handleUnlike = async () => {
-        try {
-            const response = await axios.post('/api/unlike', { petId: petProfiles[currentIndex].id });
-            console.log('Unliked:', response.data);
-            handleNextProfile();
-        } catch (error) {
-            console.error('Error unliking profile:', error);
-        }
-    };
+    // //unlike
+    // const handleUnlike = async () => {
+    //     try {
+    //         const response = await axios.post('/api/unlike', { petId: petProfiles[currentIndex].id });
+    //         console.log('Unliked:', response.data);
+    //         handleNextProfile();
+    //     } catch (error) {
+    //         console.error('Error unliking profile:', error);
+    //     }
+    // };
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;

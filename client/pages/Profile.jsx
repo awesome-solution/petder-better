@@ -21,7 +21,7 @@ const Profile = ({ onUpdateProfiles }) => {
   // picture handling state (set them to null)
   const [picture, setPicture] = useState(null)
   const [preview, setPreview] = useState(null)
-  // user's handeling // set the value to an empty string first // then update with /api 
+  // user's handeling // set the value to an empty string first // then update with /api
   // use axios? to get data from the backend database
   const [user, setUser] = useState({
     // show only username and email (for now)  // password? change the password?
@@ -33,48 +33,48 @@ const Profile = ({ onUpdateProfiles }) => {
   const [newUserData, setNewUserData] = useState({})
   const [petProfiles, setPetProfiles] = useState([])
 
-   // pet creating profile // in the /profile
+  // pet creating profile // in the /profile
   useEffect(() => {
-
     const fetchPetProfiles = async () => {
       try {
         // POST method for creating the new pet profile
-          // replace with your API endpoint
-        const response = await axios.post('/pet/signup')  // <=
-        setPetProfiles(response.data) // if not an array of nested obj => setPetProfiles([response.data]); 
+        // replace with your API endpoint
+        const response = await axios.post('http://localhost:3000/pet/') // <= change!!!
+        setPetProfiles(response.data) // if not an array of nested obj => setPetProfiles([response.data]);
       } catch (error) {
         console.error('Error fetching pet profiles:', error)
       }
     }
 
     fetchPetProfiles()
-
   }, [])
 
   // user will be get method because user already signedup in the home page
   useEffect(() => {
-
     const fetchUserData = async () => {
       try {
         // replace the endpoint here to get user after signing up!!!
-        // GET method 
-        const response = await axios.get('/api/userProfile', {
-          // headers // json
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        });
-        setUser(response.data); // call setUser 
-        
+        // GET method
+        const response = await axios.get(
+          'http://localhost:3000/api/user/user:id',
+          {
+            // headers // json
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        setUser(response.data) // call setUser
+
         // handle error
       } catch (error) {
-        console.error('Failed to fetch user data:', error);
+        console.error('Failed to fetch user data:', error)
       }
-    };
-    
-    fetchUserData();
-  }, []);
+    }
+
+    fetchUserData()
+  }, [])
 
   // handle editing data function for User
   const handleEdit = () => {
@@ -97,26 +97,26 @@ const Profile = ({ onUpdateProfiles }) => {
     setEditing(false)
   }
 
-  // handle user's input incoming change.. 
+  // handle user's input incoming change..
   const handleUserInputChange = (event) => {
-    // pass in event // use event.target 
-    const { name, value } = event.target;
+    // pass in event // use event.target
+    const { name, value } = event.target
     // then call setNewUserData // const [newUserData, setNewUserData] = useState({})
-    setNewUserData(prev => ({ ...prev, [name]: value }));
-  };
+    setNewUserData((prev) => ({ ...prev, [name]: value }))
+  }
   // handle pet's input incoming data from all input element <input />
   const handleInputChange = (e) => {
-    // pass in event // use event.target 
+    // pass in event // use event.target
     const { name, value } = e.target
     //  const [pet, setPet] = useState({})
     setPet({ ...pet, [name]: value })
   }
 
-  // choose file // use type='file' 
+  // choose file // use type='file'
   // picture's function
   const handleImageChange = (e) => {
     console.log('Files selected:', e.target.files)
-    
+
     if (e.target.files.length > 0) {
       const file = e.target.files[0]
       console.log('Selected file:', file.name)
@@ -139,7 +139,6 @@ const Profile = ({ onUpdateProfiles }) => {
       }
     }
   }, [preview]) // make sure that the cleanup runs when `preview` changes
- 
 
   const handleSubmit = async (e) => {
     e.preventDefault()
