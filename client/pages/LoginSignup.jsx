@@ -50,6 +50,7 @@ const LoginSignup = () => {
 
     console.log("Login response data:", responseData); // Log the response data
 
+    console.log("responseData", responseData)
     if (responseData.success) {
       dispatch(authSuccess(responseData.data));
       navigate("/profile");
