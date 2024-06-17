@@ -321,15 +321,14 @@ const Profile = ({ onUpdateProfiles }) => {
           <button className="btn-profile" type="submit">
             Create Profile
           </button>
-          <button className="edit-btn" type="button">
+          {/* <button className="edit-btn" type="button">
             Edit
           </button>
           <button className="delete-btn" type="button">
             Delete
-          </button>
+          </button> */}
         </form>
       </div>
-
       <div className="user-profile-container">
         <UserProfile
           user={user}

@@ -124,12 +124,15 @@ const DatingMode = () => {
           <div className='pet-card'>
             <div className='pet-profile'>
               <img
-                src={petProfiles[currentIndex].picture}
+                src={`/test1.png`}
+                // src={petProfiles[currentIndex].picture}
                 alt={petProfiles[currentIndex].name}
                 style={{
-                  maxWidth: '300px',
+                  maxWidth: '700px',
                   height: '300px',
                   borderRadius: '10px',
+                  objectFit: 'contain',
+                  width: '100%'
                 }}
               />
               <h3>{petProfiles[currentIndex].name}</h3>

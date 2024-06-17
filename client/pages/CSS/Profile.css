@@ -119,6 +119,23 @@ input {
   font-family: 'Roboto Mono', monospace;
 }
 
+
+
+/* .profiles-container {
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between; 
+  align-items: flex-start; 
+  margin: 0 auto;  
+  max-width: 1200px; 
+  padding: 20px; 
+}
+
+.user-profile-container, .pet-profile-container {
+  flex: 1;  
+  margin: 10px;  
+} */
+ 
 @media (max-width: 1024px) {
   .pet-profile-container {
     width: 90%;
@@ -136,7 +153,7 @@ input {
   height: auto;
   background-color: rgba(255, 255, 255, 0.884);
   border-radius: 20px;
-  padding: 20px;
+  /* padding: 20px; */
   margin-left: 200px;
   font-family: 'Roboto Mono', monospace;
   margin: 150px auto;
