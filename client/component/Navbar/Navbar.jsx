@@ -29,8 +29,8 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/search" className="link">
-              Search
+            <Link to="/profile" className="link">
+              Profile
             </Link>
           </li>
           <li>

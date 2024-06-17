@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-solid-svg-icons';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from "react-redux";
 import { setCurrentPet, fetchMessages, toggleChatContentVisibility, toggleUserProfileVisibility } from "../../../src/Redux/action";
 import './favListItems.css';

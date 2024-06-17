@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 const UserProfile = ({
-  // user,
+  user,
   editing,
   newUserData,
   handleUserInputChange,
@@ -14,8 +14,8 @@ const UserProfile = ({
 
   // 1. take user out from the props
   // 2. .uncoment this line
-  const user = useSelector(state => state.auth.user); //<= uncomment
-  console.log('user', user);
+  //const user = useSelector(state => state.auth.user); //<= uncomment
+  console.log('user-->', user);
 
   // Initialize states with user's existing data if available
   const [profilePic, setProfilePic] = useState(null)

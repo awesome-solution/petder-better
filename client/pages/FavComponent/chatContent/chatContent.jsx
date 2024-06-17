@@ -3,10 +3,10 @@ import test1 from '../../../public/test1.png';
 import test2 from '../../../public/test2.png';
 import "./chatContent.css";
 import ChatItem from "./chatItem";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from "react-redux";
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+// import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
+// import { useSelector } from "react-redux";
 
 const ChatContent = () => {
   const showChatContent = useSelector(state => state.pets.showChatContent);
