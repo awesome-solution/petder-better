@@ -79,7 +79,7 @@ const DatingMode = () => {
     // POST to /like then fav page req
     try {
       // current user
-      const userId = 'currentUser_Id';
+      const userId = state.user.userId;
       // current pet rendering
       const petId = petProfiles[currentIndex].id;
       // sending to endpoint of api/fav by obj key-value pairs to add or POST into
