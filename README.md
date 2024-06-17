@@ -11,10 +11,10 @@ Petder Better is a web application designed to help pet owners find suitable com
 
 ## Features
 
-- **User Authentication:** Sign up and log in securely to manage your pet profiles.
-- **Pet Profiles:** Create detailed profiles for your pets, including photos, descriptions, and preferences.
-- **Matching Algorithm:** Utilize an algorithm to suggest potential matches based on pet compatibility.
+- **User Authentication:** Sign up, log in, log out securely to manage both user and pet profile.
+- **Pet Profiles:** Create detailed profiles for your pets, including photos.
 - **Favorites:** Save your favorite pet profiles for easy access and interaction.
+- **Dating Mode:** Browse through pet profiles using intuitive previous and next buttons, and express your interest in profiles you like.
 - **Chat:** Directly communicate with other pet owners through an integrated chat feature.
 - **Responsive Design:** Ensures usability on desktop and other devices.
 
@@ -26,6 +26,7 @@ Petder Better is a web application designed to help pet owners find suitable com
   - React
   - Redux
   - CSS
+  - Webpack
 - **Backend:**
   - Node.js
   - Express
