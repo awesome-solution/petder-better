@@ -44,7 +44,7 @@ apiController.getSpeciesList = async (req, res, next) => {
 }
 
 apiController.getPotentialPets = async (req, res, next) => {
-    const userId = req.params.user_id; 
+    const userId = req.params.userId; 
 
     if (!userId) {
         return next({
@@ -63,6 +63,7 @@ apiController.getPotentialPets = async (req, res, next) => {
 
     try {
         const result = await db.query(query, [userId]);
+        console.log('AAAAAAAA: ', result.rows);
         res.locals.potentialPets = result.rows;
         return next();
     } catch (err) {
