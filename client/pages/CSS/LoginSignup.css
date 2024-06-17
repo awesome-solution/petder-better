@@ -30,6 +30,8 @@ body {
     width: 500px;
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 20px;
 }
 
 .oneLine {
@@ -39,6 +41,7 @@ body {
     align-items: center;
     gap: 20px;
     margin-bottom: 20px;
+    margin: 0;
 }
 
 .oneLine span {
@@ -48,15 +51,18 @@ body {
     display: flex;
     justify-content: center;
     cursor: pointer;
+    margin: 0;
 }
 
 header {
     color: black;
     font-size: 30px;
     text-align: center;
-    padding: 10px 0 30px 0;
+    padding: 0;
 }
-
+.input-box input{
+    margin-top: 0px;
+}
 .input-field {
     font-size: 15px;
     background:  #e6f1f6;
@@ -68,6 +74,7 @@ header {
     border: none;
     border-radius: 30px;
     transition: .2s ease;
+
 }
 .input-field:hover, .input-field:focus{
     background:rgba(255, 255, 255, 0.25);

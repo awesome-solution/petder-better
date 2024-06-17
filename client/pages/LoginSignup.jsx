@@ -30,6 +30,7 @@ const LoginSignup = () => {
 
   // login
   const login = async () => {
+    setError('');
     let responseData;
     console.log("formData", formData);
     await fetch("http://localhost:3000/api/login", {
@@ -99,33 +100,27 @@ const LoginSignup = () => {
           {authView == "SignUp" ? (
             <div className="top">
               <div className="oneLine">
-                <p>Already Have an account</p>
-                <span
+                <p>Already Have an account</p><span
                   onClick={() => {
                     dispatch(setAuthView("Login"));
                   }}
-                >
-                  Login
-                </span>
+                >Login</span>
               </div>
               <header>Sign Up</header>
             </div>
           ) : (
             <div className="top">
               <div className="oneLine">
-                <p>Create a new Account</p>
-                <span
+                <p>Create a new Account</p><span
                   onClick={() => {
                     dispatch(setAuthView("SignUp"));
                   }}
-                >
-                  Sign Up
+                >Sign Up
                 </span>
               </div>
               <header>Login</header>
             </div>
           )}
-
           <div className="input-box">
             <input
               type="text"
@@ -147,9 +142,7 @@ const LoginSignup = () => {
                 onChange={changeHandler}
               />
             </div>
-          ) : (
-            <></>
-          )}
+          ) : (<></>)}
           <div className="input-box">
             <input
               type="text"
@@ -165,22 +158,17 @@ const LoginSignup = () => {
               {error}
             </div>
           )}
-
           <button
             className="input-box"
             id="submit"
             onClick={() => {
               authView == "SignUp" ? Signup() : login();
             }}
-          >
-            Continue
+          >Continue
           </button>
-
           <div className="loginsignup-agree">
             <input type="checkbox" name="" id="" />
-            <p>
-              By Continuing, I agree to the terms of the use & privacy policy
-            </p>
+            <p>By Continuing, I agree to the terms of the use & privacy policy</p>
           </div>
         </div>
       </div>

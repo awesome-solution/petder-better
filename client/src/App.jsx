@@ -21,10 +21,10 @@ const App = () => {
     <Provider store={store}>
         <Navbar />
         <Routes>
-            {/* <Route path="/" element={<LoginSignup />}/> */}
+            <Route path="/" element={<LoginSignup />}/>
             <Route path='/favorite' element={<Favorite />} />
-            {/* <Route path='/profile' element={<Profile />} />
-            <Route path='/datingmode' element={<DatingMode />} /> */}
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/datingmode' element={<DatingMode />} />
         </Routes>
     </Provider>
   )

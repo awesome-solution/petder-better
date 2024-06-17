@@ -97,7 +97,7 @@ const FavList = ({favPets}) => {
           <div className="search_wrap">
             <input type="text" placeholder="Search Here" required />
             <button className="search-btn">
-              <i class="gg-search"></i>
+              <i className="gg-search"></i>
             </button>
           </div>
         </div>
@@ -106,9 +106,12 @@ const FavList = ({favPets}) => {
             return (
               <FavListItems
                 name={item.name} 
-                species={item.species}
+                species={item.breed}
                 animationDelay={index + 1}
-                image={item.pet.picture}
+                image={item.picture}
+                pet={item}
+                key={index}
+                userId={item.owner}
               />
             );
           })}
