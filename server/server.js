@@ -62,7 +62,7 @@ apiRouter.get('/species',
   }
 )
 
-router.get('/potential-pets/:userId', apiController.getPotentialPets, (req, res) => {
+apiRouter.get('/potential-pets/:userId', apiController.getPotentialPets, (req, res) => {
   res.status(200).json(res.locals.potentialPets);
 });
 
