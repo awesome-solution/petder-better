@@ -1,10 +1,10 @@
 import image from '../../public/test1.png';
 
 const initialState = {
-    user: {
-        "userId": 1,
-        "userName": "Aria",
-        "image": image},
+    // user: {
+    //     "userId": 1,
+    //     "userName": "Aria",
+    //     "image": image},
     authView: "Login",
   };
   
