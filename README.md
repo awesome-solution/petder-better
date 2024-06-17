@@ -15,7 +15,7 @@ Petder Better is a web application designed to help pet owners find suitable com
 - **Pet Profiles:** Create detailed profiles for your pets, including photos, descriptions, and preferences.
 - **Matching Algorithm:** Utilize an algorithm to suggest potential matches based on pet compatibility.
 - **Favorites:** Save your favorite pet profiles for easy access and interaction.
-- **Search and Filters:** Easily search for pets based on location, breed, age, and more.
+- **Chat:** Directly communicate with other pet owners through an integrated chat feature.
 - **Responsive Design:** Ensures usability on desktop and other devices.
 
 ---
@@ -24,15 +24,17 @@ Petder Better is a web application designed to help pet owners find suitable com
 
 - **Frontend:**
   - React
+  - Redux
   - CSS
 - **Backend:**
   - Node.js
   - Express
   - PostgreSQL
 - **Authentication:**
-  - JSON Web Tokens (JWT)
   - bcrypt (for password hashing)
-
+- **Cloud Storage:**
+  - AWS S3 (for storing images)
+  - Cloud solutions (for storing data)
 ---
 
 
