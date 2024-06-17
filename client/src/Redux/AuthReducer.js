@@ -1,10 +1,10 @@
 import image from '../../public/test1.png';
 
 const initialState = {
-    // user: {
-    //     "userId": 1,
-    //     "userName": "Aria",
-    //     "image": image},
+    user: {
+        "userId": 1,
+        "userName": "Aria",
+        "image": image},
     authView: "Login",
   };
   
@@ -13,7 +13,7 @@ const initialState = {
       case "AUTH_SUCCESS":
         return {
           ...state,
-          user: action.payload,
+          // user: action.payload,
         };
       case "LOGOUT":
         return {
