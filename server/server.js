@@ -188,7 +188,7 @@ app.delete('/dislike', favController.deleteDislikedPet, (req, res) => {
   return res.status(200).send(res.locals.result);
 });
 
-app.post('/map', mapController.searchPlaces, (req, res) => {
+app.get('/map', mapController.searchPlaces, (req, res) => {
   console.log('RESULT: ', res.locals.result);
   return res.status(200).send(res.locals.result);
 });
