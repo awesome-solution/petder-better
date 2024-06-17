@@ -107,6 +107,50 @@ header {
     gap: 10px;
 }
 
+/* LoginSignup.css */
+.oneLine {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 10px;
+}
+
+.oneLine p {
+margin: 0;
+font-size: 14px;
+}
+
+.oneLine span {
+color: #007BFF;
+cursor: pointer;
+text-decoration: underline;
+}
+
+.input-box {
+margin-bottom: 20px;
+}
+
+.error-message {
+color: red;
+margin-top: 10px;
+}
+
+.loginsignup-agree {
+display: flex;
+align-items: center;
+margin-top: 20px;
+}
+
+.loginsignup-agree input[type="checkbox"] {
+margin-right: 10px;
+}
+
+.loginsignup-agree p {
+margin: 0;
+font-size: 12px;
+}
+
+  
 @media (max-width: 1024px) {
     .wrapper {
         justify-content: center; 
@@ -126,3 +170,4 @@ header {
         margin-right: 50px; 
     }
 }
+
