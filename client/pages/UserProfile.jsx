@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 const UserProfile = ({
-  // user,
+  user,
   editing,
   newUserData,
   handleUserInputChange,
@@ -14,7 +14,7 @@ const UserProfile = ({
 
   // 1. take user out from the props
   // 2. .uncoment this line
-  const user = useSelector(state => state.auth.user); //<= uncomment
+  //const user = useSelector(state => state.auth.user); //<= uncomment
   console.log('user', user);
 
   // Initialize states with user's existing data if available
@@ -22,9 +22,9 @@ const UserProfile = ({
   const [previewUrl, setPreviewUrl] = useState(user ? user.profilePicture : '')
 
   //3. uncomment this code block
-  if (!user) {
-      return <div>No user data available. Please log in or sign up.</div>;
-  }
+  // if (!user) {
+  //     return <div>No user data available. Please log in or sign up.</div>;
+  // }
 
   const handleImageChange = (event) => {
     const file = event.target.files[0]
@@ -43,48 +43,16 @@ const UserProfile = ({
       <h2>User Profile</h2>
       {editing ? (
         <div className="edit-mode">
-          <input
-            type="text"
-            name="username"
-            value={newUserData.username}
-            onChange={handleUserInputChange}
-          />
-          <input
-            type="email"
-            name="email"
-            value={newUserData.email}
-            onChange={handleUserInputChange}
-          />
-          <input
-            type="file"
-            className="user-pic-input"
-            onChange={handleImageChange}
-          />
-          {previewUrl && (
-            <img
-              src={previewUrl}
-              alt="Profile Preview"
-              style={{ width: '100px', height: '100px' }}
-            />
-          )}
+          <input type="text" name="username" value={newUserData.username} onChange={handleUserInputChange} />
+          <input type="email" name="email" value={newUserData.email} onChange={handleUserInputChange} />
+          <input type="file" className="user-pic-input" onChange={handleImageChange} />
+          <img src={previewUrl || 'https://demo-lucid-hugo.define.run/images/avatar.svg'} alt="Profile Preview" style={{ width: '100px', height: '100px' }} />
           <button onClick={handleSave}>Save</button>
           <button onClick={handleCancelEdit}>Cancel</button>
         </div>
       ) : (
         <div className="show-user">
-          {previewUrl ? (
-            <img
-              src={previewUrl}
-              alt="User Profile"
-              style={{ width: '100px', height: '100px' }}
-            />
-          ) : (
-            <input
-              type="file"
-              className="user-pic-pro"
-              onChange={handleImageChange}
-            />
-          )}
+          <img src={previewUrl || 'https://demo-lucid-hugo.define.run/images/avatar.svg'} alt="User Profile" style={{ width: '100px', height: '100px' }} />
           <div>
             <strong>Username:</strong> {user.username}
           </div>
@@ -95,8 +63,8 @@ const UserProfile = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 // took this one out <button onClick={handleDelete}>Delete</button>
 
 export default UserProfile

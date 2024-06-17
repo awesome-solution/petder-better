@@ -112,7 +112,6 @@ const Profile = ({ onUpdateProfiles }) => {
         // setUser(response.data) // call setUser
         setUser({
             userId: 1,
-            
             username: "demo",
             email: "demo@test.com",
           })
@@ -221,7 +220,7 @@ const Profile = ({ onUpdateProfiles }) => {
             formData.append('picture', picture);
         }
     
-        console.log('FormData values:', Array.from(formData.entries()));
+        console.log('FormData values: -->', Array.from(formData.entries()));
         try {
             const response = await axios.post(`http://localhost:3000/pet/${userId}`, formData, {
                 headers: {
