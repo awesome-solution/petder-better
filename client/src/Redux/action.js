@@ -1,10 +1,5 @@
-export const loginSuccess = (user) => ({
-    type: 'LOGIN',
-    payload: user
-});
-
-export const signupSuccess = (user) => ({
-    type: 'SIGNUP',
+export const authSuccess = (user) => ({
+    type: "AUTH_SUCCESS",
     payload: user,
 })
 
@@ -48,3 +43,7 @@ export const toggleChatContentVisibility = () => ({
 export const toggleUserProfileVisibility = () => ({
     type: 'TOGGLE_USER_PROFILE'
 });
+
+  
+
+  

@@ -42,27 +42,6 @@ userProfileController.addUserProfile = async (req, res, next) => {
 
         res.locals.addUser = addUserData;
         return next();
-
-        // {
-        //     "username": "test1", 
-        //     "contact": "12345678", 
-        //     "email": "test1@test1.com", 
-        //     "location": "LA", 
-        //     "profile_picture": "", 
-        //     "description": "",
-        //     "password": "test1"
-        // }
-
-        // {
-        //     "id": 3,
-        //     "username": "test2",
-        //     "contact": "22345678",
-        //     "email": "test2@test2.com",
-        //     "location": "NY",
-        //     "profile_picture": "",
-        //     "description": "",
-        //     "password": "test2"
-        // }
     } catch(err) {
         return next({
             log: `Error in userProfileController.addPet, unable to add a user into DB, ${err}`,
@@ -88,9 +67,7 @@ userProfileController.updateUserProfile = async (req, res, next) => {
         WHERE id = $6
         `;
         const updateUserData = await db.query(updateUserQuery, attributes);
-        // console.log('updateUserData', updateUserData);
         res.locals.updateUser = updateUserData.rowCount;
-        // console.log('updateUser0000!!!', updateUserData.rowCount);
         return next();
     } catch(err) {
         return next({
@@ -101,59 +78,46 @@ userProfileController.updateUserProfile = async (req, res, next) => {
     }
 }
 
-// userProfileController.deleteUserProfile = async (req, res, next) => {
-//     try {
-//         const { user_id } = req.params;
-//         console.log('userProfileController.deleteUserProfile req.params', user_id);
-//         const params = [ user_id ];
-//         const deleteFromMessagesFromUserId = `
-//         DELETE FROM Messages 
-//         WHERE from_user_id = $1
-//         `;
-//         const deleteFromMessagesToUserId = `
-//         DELETE FROM Messages 
-//         WHERE to_user_id = $1
-//         `;
-//         const deleteFromDislikedPets = `
-//         DELETE FROM DislikedPets 
-//         WHERE user_id = $1
-//         `;
-//         const deleteFromFavoritePets = `
-//         DELETE FROM DislikedPets 
-//         WHERE user_id = $1
-//         `;
-//         const deleteFromUserPets = `
-//         DELETE FROM UserPets 
-//         WHERE user_id = $1
-//         `;
-//         const deleteUser = `
-//         DELETE FROM users 
-//         WHERE id = $1
-//         `;
+// Delet user profile is to reset contact, location and description to empty string
+userProfileController.deleteUserProfile = async (req, res, next) => {
+    try {
+        const { user_id } = req.params;
+        console.log('userProfileController.deleteUserProfile req.params', user_id);
+        const params = [ user_id ];
+       
+        const deleteUserProfileInfo = `
+        UPDATE users
+        SET contact = '',
+        location = '', 
+        description = ''
+        WHERE id = $1
+        RETURNING id
+        `;
 
-//         const deleteFromMessagesFromUserIdData = await db.query(deleteFromMessagesFromUserId, params);
-//         console.log('deleteFromMessagesFromUserIdData', deleteFromMessagesFromUserIdData);
-//         const deleteFromMessagesToUserIdData = await db.query(deleteFromMessagesToUserId, params);
-//         console.log('deleteFromMessagesToUserIdData', deleteFromMessagesToUserIdData);
-//         const deleteFromDislikedPetsData = await db.query(deleteFromDislikedPets, params);
-//         console.log('deleteFromDislikedPetsData', deleteFromDislikedPetsData);
-//         const deleteFromFavoritePetsData = await db.query(deleteFromFavoritePets, params);
-//         console.log('deleteFromFavoritePetsData', deleteFromFavoritePetsData);
-//         const deleteFromUserPetsData = await db.query(deleteFromUserPets, params);
-//         console.log('deleteFromUserPetsData', deleteFromUserPetsData);
-//         const deleteUserData = await db.query(deleteUser, params);
-//         console.log('deleteUserData', deleteUserData);
+        const deleteUserProfileInfoData = await db.query(deleteUserProfileInfo, params);
+        console.log('deleteUserProfileInfoData', deleteUserProfileInfoData.rows[0].id);
 
-//         res.locals.deleteUser = deleteUserData;
-//         return next();
-//     } catch(err) {
-//         return next({
-//             log: `Error in userProfileController.deleteUserProfile, unable to delete a user into DB, ${err}`,
-//             message: {err: 'Error ocurred in your delete request to /:user_id'},
-//             status: 500
-//         });
-//     }
-// }
+        res.locals.deleteUser = deleteUserProfileInfoData.rows[0].id;
+        return next();
+    } catch(err) {
+        return next({
+            log: `Error in userProfileController.deleteUserProfile, unable to reset contact, location and description to empty string in the DB, ${err}`,
+            message: {err: 'Error ocurred in your delete request to /:user_id'},
+            status: 500
+        });
+    }
+}
 
+userProfileController.uploadUserPicture = async (req, res, next) => {
+
+}
+
+userProfileController.updateUserPicture = async (req, res, next) => {
+
+}
+
+userProfileController.deleteUserPicture = async (req, res, next) => {
+
+}
 
 module.exports = userProfileController
