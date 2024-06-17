@@ -1,9 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Merriweather:wght@900&family=Poppins&display=swap');
+
+
 * {
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Poppins', sans-serif;
 }
+
+.profile-container {
+  display:flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 20px;
+}
+
 
 .dropdown-content {
   position: relative;
@@ -38,8 +51,9 @@
   border-radius: 20px;
   padding: 20px;
   margin-left: 200px;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   margin: 150px auto;
+  flex: 3
 }
 
 label {
@@ -90,12 +104,6 @@ input {
   margin-left: 5px;
   margin-right: 5px;
   outline: none;
-}
-
-.pet-profile-header {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-family: 'Roboto Mono', monospace;
 }
 
 #upload-img {
@@ -162,6 +170,7 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   box-shadow: 0px 8px 20px 0px rgba(66, 158, 172, 0.859);
   width: 700px;
   height: auto;
@@ -171,7 +180,78 @@ input::placeholder {
   margin-left: 200px;
   font-family: 'Roboto Mono', monospace;
   margin: 150px auto;
+  flex:1;
 }
+
+.user-profile-container .user-profile{
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  align-items: center;
+}
+
+.user-profile-container .edit-mode {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-profile-container .show-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pet-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 80vh;
+}
+
+.form {
+  display: grid;
+  height: 100%;
+  margin-left: 30px;
+  margin-right: 10px;
+  padding-bottom: 40px;
+  grid-template-rows: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 30px;
+}
+
+.input-item input, .input-item select {
+  width: 250px;
+}
+
+.pet-profile-header {
+  font-family: 'Poppins', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.image-preview {
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-preview  img{
+  height: 100px;
+  width: 100px;
+}
+
 
 @media (max-width: 1024px) {
     .user-profile-container {

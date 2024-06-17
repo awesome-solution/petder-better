@@ -227,97 +227,121 @@ const Profile = ({ onUpdateProfiles }) => {
   return (
     <div className="profile-container">
       <div className="pet-profile-container">
+        <form className="form" onSubmit={handleSubmit}>
         <h2 className="pet-profile-header">Let's Create Your Pet Profile</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="file"
-            onChange={handleImageChange}
-            onClick={(e) => console.log('Input clicked')}
-          />
-
-          {preview && (
+        {preview && (
             <div className="image-preview">
               <img src={preview} alt="Image Preview" />
             </div>
           )}
           <div className="input-container">
-            <input
-              type="text"
-              name="name"
-              value={pet.name}
-              placeholder="Pet Name"
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              name="color"
-              value={pet.color}
-              onChange={handleInputChange}
-              placeholder="Color"
-            />
-            <input
-            type="text"
-            name="size"
-            value={pet.size}
-            placeholder="Size"
-            onChange={handleInputChange}
-            />
-            <select name="species_id" value={selectedSpecies} onChange={handleSpeciesChange} className="dropdown-content">
-                {
-                    species.map(s => (
-                        <option key={s.id} value={s.id}>{s.name}</option>
-                    ))
-                }
-            </select>
-            <select
-              name="breed_id"
-              value={pet.breed_id}
-              onChange={handleInputChange}  
-              className="dropdown-content"
-            >
-              <option value="">Select Breed</option>
-              {breeds.map(b => (
-                <option key={b.id} value={b.id}>{b.name}</option>
-              ))}
-            </select>
-
-            <select
-              name="gender"
-              value={pet.gender}
-              onChange={handleInputChange}
-              className="dropdown-content"
-            >
-              <option value="">Select Gender</option>
-              <option value="boy">Boy</option>
-              <option value="girl">Girl</option>
-            </select>
-            
-            <label>
-              Neutered:
+            <div className="input-item">
+              <label for="name">Pet Name: </label>
               <input
-                type="checkbox"
-                name="neutering"
-                checked={pet.neutering}
-                onChange={(e) =>
-                  setPet({ ...pet, neutering: e.target.checked })
-                }
+                type="text"
+                name="name"
+                value={pet.name}
+                placeholder="Pet Name"
+                onChange={handleInputChange}
               />
-            </label>
-
-            <input
-              name="medical_records"
-              value={pet.medical_records}
+            </div>
+            <div className="input-item">
+              <label htmlFor="color">Color:</label>
+              <input
+                type="text"
+                name="color"
+                value={pet.color}
+                onChange={handleInputChange}
+                placeholder="Color"
+              />
+            </div>
+            <div className="input-item">
+              <label htmlFor="size">Size:</label>
+              <input
+              type="text"
+              name="size"
+              value={pet.size}
+              placeholder="Size"
               onChange={handleInputChange}
-              placeholder="Medical Records"
-            />
-
-            <input
-              name="description"
-              value={pet.description}
-              onChange={handleInputChange}
-              placeholder="Description"
-            />
+              />
+            </div>
+            <div className="input-item">
+              <label htmlFor="species_id">Species:</label>
+              <select name="species_id" value={selectedSpecies} onChange={handleSpeciesChange} className="dropdown-content">
+                  {
+                      species.map(s => (
+                          <option key={s.id} value={s.id}>{s.name}</option>
+                      ))
+                  }
+              </select>
+            </div>
+            <div className="input-item">
+              <label htmlFor="breed_id">Breed:</label>
+              <select
+                name="breed_id"
+                value={pet.breed_id}
+                onChange={handleInputChange}  
+                className="dropdown-content"
+              >
+                <option value="">Select Breed</option>
+                {breeds.map(b => (
+                  <option key={b.id} value={b.id}>{b.name}</option>
+                ))}
+              </select>
+            </div>
+            <div className="input-item">
+              <label htmlFor="gender">Gender:</label>
+              <select
+                name="gender"
+                value={pet.gender}
+                onChange={handleInputChange}
+                className="dropdown-content"
+              >
+                <option value="">Select Gender</option>
+                <option value="boy">Boy</option>
+                <option value="girl">Girl</option>
+              </select>
+            </div>
+            <div className="input-item" id="checkbox">
+                <label htmlFor="neutering">Neutered:</label>
+                <input
+                  type="checkbox"
+                  name="neutering"
+                  checked={pet.neutering}
+                  onChange={(e) =>
+                    setPet({ ...pet, neutering: e.target.checked })
+                  }
+                />
+            </div>
+            <div className="input-item">
+              <label htmlFor="medical_records">Medical Records:</label>
+              <input
+                name="medical_records"
+                value={pet.medical_records}
+                onChange={handleInputChange}
+                placeholder="Medical Records"
+              />
+            </div>
+            <div className="input-item">
+              <label htmlFor="description">Description:</label>
+              <input
+                name="description"
+                value={pet.description}
+                onChange={handleInputChange}
+                placeholder="Description"
+              />
+            </div>
+            <div className="input-item">
+              <label for="photo">Upload Photo Here</label>
+              <input
+                type="file"
+                name="photo"
+                onChange={handleImageChange}
+                onClick={(e) => console.log('Input clicked')}
+              />
+            </div>
           </div>
+          
 
           <button className="btn-profile" type="submit">
             Create Profile
