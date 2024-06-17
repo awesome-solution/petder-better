@@ -1,5 +1,7 @@
 # Petder Better
 > A dating web application for pet lovers to connect and find companionship for their pets.
+> 
+![Petder Better](https://github.com/awesome-solution/petder-better/blob/main/client/public/icon.png?raw=true)
 
 ---
 
