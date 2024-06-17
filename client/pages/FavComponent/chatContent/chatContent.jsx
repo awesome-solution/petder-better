@@ -9,7 +9,7 @@ import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from "react-redux";
 
 const ChatContent = () => {
-  const showChatContent = useSelector(state => state.pets.showChatContent);
+  const showChatContent = useSelector(state => state.pets.currentMessages);
   const currPet = useSelector(state => state.pets.pets);
   const user = useSelector(state => state.auth.user);
   // const chatItms = [
