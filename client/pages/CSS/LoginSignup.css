@@ -155,6 +155,10 @@ header {
     margin: 0;
     font-size: 12px;
 }
+
+input::placeholder {
+    color: rgba(128, 128, 128, 0.741);
+}
   
 @media (max-width: 1024px) {
     .wrapper {

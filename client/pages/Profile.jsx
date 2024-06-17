@@ -291,6 +291,7 @@ const Profile = ({ onUpdateProfiles }) => {
               <option value="boy">Boy</option>
               <option value="girl">Girl</option>
             </select>
+            
             <label>
               Neutered:
               <input

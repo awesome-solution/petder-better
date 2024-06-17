@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import './CSS/Profile.css'
 
 const UserProfile = ({
   user,
@@ -59,7 +60,7 @@ const UserProfile = ({
           <div>
             <strong>Email:</strong> {user.email}
           </div>
-          <button onClick={handleEdit}>Edit</button>
+          <button className="btn-profile" onClick={handleEdit}>Edit</button>
         </div>
       )}
     </div>
