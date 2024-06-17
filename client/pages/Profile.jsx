@@ -79,11 +79,11 @@ const Profile = ({ onUpdateProfiles }) => {
   // pet creating profile // in the /profile
   useEffect(() => {
     const fetchPetProfiles = async () => {
-        setUser(userContext.userId)
+        // setUser(userContext.userId)
       try {
         // POST method for creating the new pet profile
         // replace with your API endpoint
-        const response = await axios.post('http://localhost:3000/pet/${userId}') // <= change!!!
+        const response = await axios.post(`http://localhost:3000/pet/${userContext.userId}`) // <= change!!!
         setPetProfiles(response.data) // if not an array of nested obj => setPetProfiles([response.data]);
       } catch (error) {
         console.error('Error fetching pet profiles:', error)
@@ -97,22 +97,8 @@ const Profile = ({ onUpdateProfiles }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // replace the endpoint here to get user after signing up!!!
-        // GET method 
-
-        // uncomment these code black //
-        // const response = await axios.get('http://localhost:3000/api/user/user:id',{
-        //     // headers // json
-        //     headers: {
-        //       Accept: 'application/json',
-        //       'Content-Type': 'application/json',
-        //     },
-        //   }
-        // )
-        // setUser(response.data) // call setUser
         setUser({
             userId: 1,
-            
             username: "demo",
             email: "demo@test.com",
           })
@@ -154,13 +140,6 @@ const Profile = ({ onUpdateProfiles }) => {
     // then call setNewUserData // const [newUserData, setNewUserData] = useState({})
     setNewUserData((prev) => ({ ...prev, [name]: value }))
   }
-    // handle pet's input incoming data from all input element <input />
-    //   const handleInputChange = (e) => {
-    //     // pass in event // use event.target
-    //     const { name, value } = e.target
-    //     //  const [pet, setPet] = useState({})
-    //     setPet({ ...pet, [name]: value })
-    //   }
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setPet(prevPet => ({
@@ -221,37 +200,29 @@ const Profile = ({ onUpdateProfiles }) => {
             formData.append('picture', picture);
         }
     
-        console.log('FormData values:', Array.from(formData.entries()));
+        console.log('FormData values: -->',formData, Array.from(formData.entries()));
         try {
-            const response = await axios.post(`http://localhost:3000/pet/${userId}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+          // const response = await axios.post(`http://localhost:3000/pet/${userId}`, formData);
+
+          const response = await axios.post(`http://localhost:3000/pet/${userId}`, {
+            'name': pet.name,
+            'color': pet.color,
+            'size': pet.size,
+            'species_id': pet.species_id,
+            'breed_id': pet.breed_id,
+            'gender': pet.gender,
+            'neutering': pet.neutering,
+            'medical_records': pet.medical_records,
+            'description': pet.description,
+          });
+           
             console.log('Pet profile created:', response.data);
-            fetchPetProfiles(); // Refresh pet profiles after creation
-            onUpdateProfiles(); // Notify parent component about the update
+            // fetchPetProfiles(); // Refresh pet profiles after creation
+            // onUpdateProfiles(); // Notify parent component about the update
         } catch (error) {
             console.error('Error creating pet profile:', error);
         }
     };
-//   const handleSubmit = async (e) => {
-//     e.preventDefault()
-
-//     const formData = new FormData()
-//     formData.append('image', picture)
-//     Object.keys(pet).forEach((key) => formData.append(key, pet[key]))
-
-//     try {
-//       const response = await axios.post('/pet', formData)
-//       console.log('Pet profile created:', response.data)
-//       // not sure about these two?
-//       fetchPetProfiles() // Refresh pet profiles after creation
-//       onUpdateProfiles() // Notify parent component about the update
-//     } catch (error) {
-//       console.error('Error creating pet profile:', error)
-//     }
-//   }
 
   return (
     <div className="profile-container">
@@ -277,13 +248,6 @@ const Profile = ({ onUpdateProfiles }) => {
               placeholder="Pet Name"
               onChange={handleInputChange}
             />
-            {/* <input
-              type="text"
-              name="age"
-              value={pet.age}
-              placeholder="Age"
-              onChange={handleInputChange}
-            /> */}
             <input
               type="text"
               name="color"
@@ -291,13 +255,6 @@ const Profile = ({ onUpdateProfiles }) => {
               onChange={handleInputChange}
               placeholder="Color"
             />
-            {/* <input
-              type="text"
-              name="weight"
-              value={pet.weight}
-              onChange={handleInputChange}
-              placeholder="Weight"
-            /> */}
             <input
             type="text"
             name="size"
@@ -305,20 +262,6 @@ const Profile = ({ onUpdateProfiles }) => {
             placeholder="Size"
             onChange={handleInputChange}
             />
-            {/* <select
-              name="species_id"
-              value={pet.species_id}
-              onChange={handleInputChange}
-              className="dropdown-content"
-            >
-              <option value="">Select Species</option>
-              <option value="1">Dog</option>
-              <option value="2">Cat</option>
-              <option value="3">Rabbit</option>
-              <option value="4">Snake</option>
-              <option value="5">Bird</option>
-            </select> */}
-
             <select name="species_id" value={selectedSpecies} onChange={handleSpeciesChange} className="dropdown-content">
                 {
                     species.map(s => (
@@ -326,38 +269,28 @@ const Profile = ({ onUpdateProfiles }) => {
                     ))
                 }
             </select>
-
-            {/* <input
-              type="text"
+            <select
               name="breed_id"
               value={pet.breed_id}
-              placeholder="Breed"
-              onChange={handleInputChange}
-            /> */}
-
-            <select>
-                {breeds.map(b => (
-                    <option key={b.id} value={b.id}>{b.name}</option>
-                ))}
+              onChange={handleInputChange}  
+              className="dropdown-content"
+            >
+              <option value="">Select Breed</option>
+              {breeds.map(b => (
+                <option key={b.id} value={b.id}>{b.name}</option>
+              ))}
             </select>
-            {/* <input
-              type="text"
-              name="location"
-              value={pet.location}
-              placeholder="Location"
-              onChange={handleInputChange}
-            /> */}
+
             <select
               name="gender"
               value={pet.gender}
               onChange={handleInputChange}
               className="dropdown-content"
             >
-              {/* <option value="">Gender</option> */}
+              <option value="">Select Gender</option>
               <option value="boy">Boy</option>
               <option value="girl">Girl</option>
             </select>
-
             <label>
               Neutered:
               <input

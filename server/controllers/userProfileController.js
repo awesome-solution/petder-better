@@ -65,9 +65,15 @@ userProfileController.updateUserProfile = async (req, res, next) => {
         profile_picture = $4, 
         description = $5
         WHERE id = $6
+        RETURNING id, username, profile_picture
         `;
         const updateUserData = await db.query(updateUserQuery, attributes);
-        res.locals.updateUser = updateUserData.rowCount;
+        res.locals.updateUser = {
+            userId: updateUserData.rows[0].id,
+            username: updateUserData.rows[0].username,
+            profile_picture: updateUserData.rows[0].profile_picture
+        }
+
         return next();
     } catch(err) {
         return next({

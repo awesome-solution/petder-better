@@ -94,85 +94,49 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className="wrapper">
-      <div className="form-box">
-        <div className="register-container" id="register">
-          {authView == "SignUp" ? (
-            <div className="top">
-              <div className="oneLine">
-                <p>Already Have an account</p><span
-                  onClick={() => {
-                    dispatch(setAuthView("Login"));
-                  }}
-                >Login</span>
-              </div>
-              <header>Sign Up</header>
-            </div>
-          ) : (
-            <div className="top">
-              <div className="oneLine">
-                <p>Create a new Account</p><span
-                  onClick={() => {
-                    dispatch(setAuthView("SignUp"));
-                  }}
-                >Sign Up
-                </span>
-              </div>
-              <header>Login</header>
-            </div>
-          )}
-          <div className="input-box">
-            <input
-              type="text"
-              className="input-field"
-              placeholder="Your Name"
-              name="username"
-              value={formData.username}
-              onChange={changeHandler}
-            />
-          </div>
-          {authView == "SignUp" ? (
-            <div className="input-box">
-              <input
-                type="text"
-                className="input-field"
-                placeholder="Email"
-                name="email"
-                value={formData.email}
-                onChange={changeHandler}
-              />
-            </div>
-          ) : (<></>)}
-          <div className="input-box">
-            <input
-              type="text"
-              className="input-field"
-              placeholder="Password"
-              name="password"
-              value={formData.password}
-              onChange={changeHandler}
-            />
-          </div>
-          {error && (
-            <div className="error-message" style={{ color: "red" }}>
-              {error}
-            </div>
-          )}
-          <button
-            className="input-box"
-            id="submit"
-            onClick={() => {
-              authView == "SignUp" ? Signup() : login();
-            }}
-          >Continue
-          </button>
-          <div className="loginsignup-agree">
-            <input type="checkbox" name="" id="" />
-            <p>By Continuing, I agree to the terms of the use & privacy policy</p>
-          </div>
-        </div>
-      </div>
-    </div>
+        <div className="wrapper">
+    <div className="form-box">
+      <div className="register-container" id="register">
+        {authView === "SignUp" ? (
+          <div className="top">
+            <div className="oneLine">
+              <p>Already have an account?</p>
+              <span onClick={() => dispatch(setAuthView("Login"))}>Login</span>
+            </div>
+            <header>Sign Up</header>
+          </div>
+        ) : (
+          <div className="top">
+            <div className="oneLine">
+              <p>Create a new Account</p>
+              <span onClick={() => dispatch(setAuthView("SignUp"))}>Sign Up</span>
+            </div>
+            <header>Login</header>
+          </div>
+        )}
+        
+        {/* Form fields */}
+        <input type="text" className="input-field" placeholder="Your Name" name="username" value={formData.username} onChange={changeHandler} />
+        {authView === "SignUp" && (
+          <input type="email" className="input-field" placeholder="Email" name="email" value={formData.email} onChange={changeHandler} />
+        )}
+        <input type="password" className="input-field" placeholder="Password" name="password" value={formData.password} onChange={changeHandler} />
+        
+        {/* Error message display */}
+        {error && <div className="error-message">{error}</div>}
+        
+        {/* Form submission button */}
+        <button className="input-box" id="submit" onClick={() => { authView === "SignUp" ? Signup() : login(); }}>Continue</button>
+        
+        {/* Checkbox for terms and conditions */}
+        <div className="loginsignup-agree">
+          <input type="checkbox" id="termsCheckbox" />
+          <label htmlFor="termsCheckbox">By Continuing, I agree to the terms of the use & privacy policy</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   );
 };
 
