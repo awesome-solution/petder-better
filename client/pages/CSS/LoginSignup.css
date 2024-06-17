@@ -30,6 +30,8 @@ body {
     width: 500px;
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 20px;
 }
 
 .oneLine {
@@ -39,6 +41,7 @@ body {
     align-items: center;
     gap: 20px;
     margin-bottom: 20px;
+    margin: 0;
 }
 
 .oneLine span {
@@ -48,15 +51,18 @@ body {
     display: flex;
     justify-content: center;
     cursor: pointer;
+    margin: 0;
 }
 
 header {
     color: black;
     font-size: 30px;
     text-align: center;
-    padding: 10px 0 30px 0;
+    padding: 0;
 }
-
+.input-box input{
+    margin-top: 0px;
+}
 .input-field {
     font-size: 15px;
     background:  #e6f1f6;
@@ -68,6 +74,7 @@ header {
     border: none;
     border-radius: 30px;
     transition: .2s ease;
+
 }
 .input-field:hover, .input-field:focus{
     background:rgba(255, 255, 255, 0.25);
@@ -107,23 +114,69 @@ header {
     gap: 10px;
 }
 
+.oneLine {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.oneLine p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.oneLine span {
+    color: #007BFF;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.input-box {
+    rgin-bottom: 20px;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.loginsignup-agree {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.loginsignup-agree input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.loginsignup-agree p {
+    margin: 0;
+    font-size: 12px;
+}
+
+input::placeholder {
+    color: rgba(128, 128, 128, 0.741);
+}
+  
 @media (max-width: 1024px) {
     .wrapper {
-        justify-content: center; /* 水平居中 */
+        justify-content: center; 
         
     }
     .form-box {
-        margin: 0 auto; /* 自动边距实现居中 */
+        margin: 0 auto; 
         margin-top: 200px;
     }
 }
 
-/* 大屏幕，屏幕宽度大于1024px时，右对齐 */
 @media (min-width: 1025px) {
     .wrapper {
-        justify-content: flex-end; /* 水平靠右对齐 */
+        justify-content: flex-end; 
     }
     .form-box {
-        margin-right: 50px; /* 靠右间距 */
+        margin-right: 50px; 
     }
 }
+

@@ -31,7 +31,8 @@ const authController = {
               message: 'login successfully',
               data: {
                 userId: data.rows[0].id,
-                username: data.rows[0].username
+                username: data.rows[0].username,
+                profile_picture: data.rows[0].profile_picture
               }
             }
             
@@ -63,15 +64,17 @@ const authController = {
       message: { err: 'username exists' },
     })
     const hashedPassword = await bcrypt.hash(password, saltRounds)
-    const createUser = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${hashedPassword}') RETURNING id, username`
+    const createUser = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${hashedPassword}') RETURNING id, username, profile_picture`
     db.query(createUser)
       .then(data => {
+        console.log(data)
         res.locals.user = {
           success: true,
           message: 'signup successfully',
           data: {
             userId: data.rows[0].id,
-            username: data.rows[0].username
+            username: data.rows[0].username,
+            profile_picture: data.rows[0].profile_picture
           }
         }
         //In the frontend, they are looking for response after signup. But in data.rows, it will not return anything. So I put the whole data in return 

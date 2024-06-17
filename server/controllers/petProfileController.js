@@ -27,6 +27,7 @@ petProfileController.getPetProfile = async (req, res, next) => {
 
 petProfileController.addPetProfile = async (req, res, next) => {
     try {
+        console.log('Received body:', req.body);
         const { user_id } = req.params;
         console.log('addPetProfile req.params', user_id);
         console.log('addPetProfile Body', req.body);

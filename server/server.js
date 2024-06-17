@@ -20,7 +20,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -49,8 +48,9 @@ apiRouter.post('/login', authController.getUser, (req, res) => {
 
 //http://localhost:3000/api/login
 apiRouter.post('/signup', authController.createUser, (req, res) => {
-  return res.status(200).json(res.locals.user);
-});
+  console.log('res.locals.user: ', res.locals.user);
+  return res.status(200).json(res.locals.user)
+})
 
 apiRouter.get('/breeds', apiController.getBreedsList, (req, res) => {
   return res.status(200).json(res.locals.breedsList);
@@ -60,8 +60,8 @@ apiRouter.get('/species', apiController.getSpeciesList, (req, res) => {
   return res.status(200).json(res.locals.speciesList);
 });
 
-apiRouter.get('/potential-pets', apiController.getPotentialPets, (req, res) => {
-  return res.status(200).json(res.locals.potentialPets);
+apiRouter.get('/potential-pets/:userId', apiController.getPotentialPets, (req, res) => {
+  res.status(200).json(res.locals.potentialPets);
 });
 
 // http://localhost:3000/users/

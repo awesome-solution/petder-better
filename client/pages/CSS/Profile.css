@@ -54,7 +54,7 @@ label input[type='checkbox'] {
 
 .btn-profile {
   width: 200px;
-  height: 50px;
+  height: 45px;
   background-color: #f9f9f9;
   box-shadow: 0px 8px 20px 0px rgba(66, 158, 172, 0.859);
   font-weight: 600;
@@ -73,6 +73,7 @@ label input[type='checkbox'] {
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
+  justify-content: flex-start;
 }
 
 .input-container > * {
@@ -119,6 +120,36 @@ input {
   font-family: 'Roboto Mono', monospace;
 }
 
+input[type="file"]::file-selector-button {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+
+}
+
+/* .profiles-container {
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between; 
+  align-items: flex-start; 
+  margin: 0 auto;  
+  max-width: 1200px; 
+  padding: 20px; 
+}
+
+.user-profile-container, .pet-profile-container {
+  flex: 1;  
+  margin: 10px;  
+} */
+
+input::placeholder {
+  color: rgba(128, 128, 128, 0.741);
+}
+
+ 
 @media (max-width: 1024px) {
   .pet-profile-container {
     width: 90%;
@@ -136,7 +167,7 @@ input {
   height: auto;
   background-color: rgba(255, 255, 255, 0.884);
   border-radius: 20px;
-  padding: 20px;
+  /* padding: 20px; */
   margin-left: 200px;
   font-family: 'Roboto Mono', monospace;
   margin: 150px auto;

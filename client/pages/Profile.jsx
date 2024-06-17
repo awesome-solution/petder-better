@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './CSS/Profile.css'
 import UserProfile from './UserProfile' // Import UserProfile component
+import { useSelector } from 'react-redux'
 
 const Profile = ({ onUpdateProfiles }) => {
   const [pet, setPet] = useState({
@@ -25,6 +26,7 @@ const Profile = ({ onUpdateProfiles }) => {
   // use axios? to get data from the backend database
   const [user, setUser] = useState({
     // show only username and email (for now)  // password? change the password?
+    userId: '',
     username: '',
     email: '',
   })
@@ -32,14 +34,56 @@ const Profile = ({ onUpdateProfiles }) => {
   const [editing, setEditing] = useState(false)
   const [newUserData, setNewUserData] = useState({})
   const [petProfiles, setPetProfiles] = useState([])
+  const [species, setSpecies] = useState([]);
+  const [breeds, setBreeds] = useState([]);
+  const [selectedSpecies, setSelectedSpecies] = useState(7);
+
+  const userContext = useSelector(state => state.auth.user); //<= uncomment
+  console.log('user', userContext);
+
+  // fetch species data
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/species')
+        .then(response => {
+            setSpecies(response.data);
+        })
+        .catch(error => {
+            console.error('Failed to fetch species:', error);
+        })
+    }, [])
+
+  // fetch breedsList data
+  const fetchBreeds = (speciesId) => {
+    axios.get(`http://localhost:3000/api/breeds?speciesId=${speciesId}`)
+        .then(response => {
+            setBreeds(response.data);
+        })
+        .catch(error => {
+            console.error('Failed to fetch breeds:', error);
+        });
+    };
+
+    useEffect(() => {
+        if (selectedSpecies) {
+            fetchBreeds(selectedSpecies);
+        }
+    }, [selectedSpecies]);  
+  
+  const handleSpeciesChange = (event) => {
+    const newSpeciesId = event.target.value;
+    setSelectedSpecies(newSpeciesId);
+    setPet({ ...pet, species_id: newSpeciesId, breed_id: '' }); 
+    fetchBreeds(newSpeciesId); 
+  }
 
   // pet creating profile // in the /profile
   useEffect(() => {
     const fetchPetProfiles = async () => {
+        // setUser(userContext.userId)
       try {
         // POST method for creating the new pet profile
         // replace with your API endpoint
-        const response = await axios.post('http://localhost:3000/pet/') // <= change!!!
+        const response = await axios.post(`http://localhost:3000/pet/${userContext.userId}`) // <= change!!!
         setPetProfiles(response.data) // if not an array of nested obj => setPetProfiles([response.data]);
       } catch (error) {
         console.error('Error fetching pet profiles:', error)
@@ -53,19 +97,11 @@ const Profile = ({ onUpdateProfiles }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // replace the endpoint here to get user after signing up!!!
-        // GET method
-        const response = await axios.get(
-          'http://localhost:3000/api/user/user:id',
-          {
-            // headers // json
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-          }
-        )
-        setUser(response.data) // call setUser
+        setUser({
+            userId: 1,
+            username: "demo",
+            email: "demo@test.com",
+          })
 
         // handle error
       } catch (error) {
@@ -104,13 +140,14 @@ const Profile = ({ onUpdateProfiles }) => {
     // then call setNewUserData // const [newUserData, setNewUserData] = useState({})
     setNewUserData((prev) => ({ ...prev, [name]: value }))
   }
-  // handle pet's input incoming data from all input element <input />
-  const handleInputChange = (e) => {
-    // pass in event // use event.target
-    const { name, value } = e.target
-    //  const [pet, setPet] = useState({})
-    setPet({ ...pet, [name]: value })
-  }
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setPet(prevPet => ({
+        ...prevPet,
+        [name]: value
+        }));
+    };
+  
 
   // choose file // use type='file'
   // picture's function
@@ -140,23 +177,52 @@ const Profile = ({ onUpdateProfiles }) => {
     }
   }, [preview]) // make sure that the cleanup runs when `preview` changes
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+    const handleSubmit = async (event) => {
+        event.preventDefault();  // Prevent the default form submission behavior
+    
+        const userId = userContext.userId; // Ensure you have the userId
+        if (!userId) {
+            console.error("No user ID available");
+            return;
+        }
+    
+        const formData = new FormData();
+        formData.append('name', pet.name);
+        formData.append('color', pet.color);
+        formData.append('size', pet.size);
+        formData.append('species_id', pet.species_id);
+        formData.append('breed_id', pet.breed_id);
+        formData.append('gender', pet.gender);
+        formData.append('neutering', pet.neutering);
+        formData.append('medical_records', pet.medical_records);
+        formData.append('description', pet.description);
+        if (picture) {
+            formData.append('picture', picture);
+        }
+    
+        console.log('FormData values: -->',formData, Array.from(formData.entries()));
+        try {
+          // const response = await axios.post(`http://localhost:3000/pet/${userId}`, formData);
 
-    const formData = new FormData()
-    formData.append('image', picture)
-    Object.keys(pet).forEach((key) => formData.append(key, pet[key]))
-
-    try {
-      const response = await axios.post('/api/petProfile/create', formData)
-      console.log('Pet profile created:', response.data)
-      // not sure about these two?
-      fetchPetProfiles() // Refresh pet profiles after creation
-      onUpdateProfiles() // Notify parent component about the update
-    } catch (error) {
-      console.error('Error creating pet profile:', error)
-    }
-  }
+          const response = await axios.post(`http://localhost:3000/pet/${userId}`, {
+            'name': pet.name,
+            'color': pet.color,
+            'size': pet.size,
+            'species_id': pet.species_id,
+            'breed_id': pet.breed_id,
+            'gender': pet.gender,
+            'neutering': pet.neutering,
+            'medical_records': pet.medical_records,
+            'description': pet.description,
+          });
+           
+            console.log('Pet profile created:', response.data);
+            // fetchPetProfiles(); // Refresh pet profiles after creation
+            // onUpdateProfiles(); // Notify parent component about the update
+        } catch (error) {
+            console.error('Error creating pet profile:', error);
+        }
+    };
 
   return (
     <div className="profile-container">
@@ -184,64 +250,48 @@ const Profile = ({ onUpdateProfiles }) => {
             />
             <input
               type="text"
-              name="age"
-              value={pet.age}
-              placeholder="Age"
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
               name="color"
               value={pet.color}
               onChange={handleInputChange}
               placeholder="Color"
             />
             <input
-              type="text"
-              name="size"
-              value={pet.size}
-              onChange={handleInputChange}
-              placeholder="Weight"
+            type="text"
+            name="size"
+            value={pet.size}
+            placeholder="Size"
+            onChange={handleInputChange}
             />
-            <select
-              name="species_id"
-              value={pet.species_id}
-              onChange={handleInputChange}
-              className="dropdown-content"
-            >
-              <option value="">Select Species</option>
-              <option value="1">Dog</option>
-              <option value="2">Cat</option>
-              <option value="3">Rabbit</option>
-              <option value="4">Snake</option>
-              <option value="5">Bird</option>
+            <select name="species_id" value={selectedSpecies} onChange={handleSpeciesChange} className="dropdown-content">
+                {
+                    species.map(s => (
+                        <option key={s.id} value={s.id}>{s.name}</option>
+                    ))
+                }
             </select>
-
-            <input
-              type="text"
+            <select
               name="breed_id"
               value={pet.breed_id}
-              placeholder="Breed"
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              name="location"
-              value={pet.location}
-              placeholder="Location"
-              onChange={handleInputChange}
-            />
+              onChange={handleInputChange}  
+              className="dropdown-content"
+            >
+              <option value="">Select Breed</option>
+              {breeds.map(b => (
+                <option key={b.id} value={b.id}>{b.name}</option>
+              ))}
+            </select>
+
             <select
               name="gender"
               value={pet.gender}
               onChange={handleInputChange}
               className="dropdown-content"
             >
-              <option value="">Gender</option>
+              <option value="">Select Gender</option>
               <option value="boy">Boy</option>
               <option value="girl">Girl</option>
             </select>
-
+            
             <label>
               Neutered:
               <input
@@ -270,17 +320,16 @@ const Profile = ({ onUpdateProfiles }) => {
           </div>
 
           <button className="btn-profile" type="submit">
-            Create/Update Profile
+            Create Profile
           </button>
-          <button className="edit-btn" type="button">
+          {/* <button className="edit-btn" type="button">
             Edit
           </button>
           <button className="delete-btn" type="button">
             Delete
-          </button>
+          </button> */}
         </form>
       </div>
-
       <div className="user-profile-container">
         <UserProfile
           user={user}
