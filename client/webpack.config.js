@@ -40,12 +40,13 @@ module.exports = {
     hot: true,
     port: 8080,
     proxy: [
-        {
-            context: ['/api'],
-            target: 'http://localhost:3000/',
-            secure: false,
-        }
-    ],
+      {
+          context: ['/api'],
+          target: 'http://localhost:3000',
+          secure: false,
+          changeOrigin: true
+      }
+  ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],

@@ -1,0 +1,111 @@
+.main__chatcontent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px 40px 0px;
+    max-width: 63%;
+    border-right: 1px solid #ebe7fb;
+    box-sizing: border-box;
+    max-height:75vh;
+  }
+  .content__header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ebe7fb;
+  }
+  .current-chatting-user {
+    display: flex;
+    align-items: center;
+  }
+  .current-chatting-user p {
+    margin: 0;
+    font-weight: 600;
+  }
+  .content__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .content__body {
+    flex-grow: 1;
+    max-height: 70vh;
+    overflow: auto;
+  }
+
+  .content__footer {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .chat__item {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    transform: scale(0);
+    transform-origin: right;
+    animation-name: showIn;
+    animation-duration: 0.2s; 
+    animation-iteration-count: 1;
+    animation-direction: normal; 
+    animation-timing-function: cubic-bezier(
+      0.88,
+      0.19,
+      0.37,
+      1.11
+    ); 
+    animation-fill-mode: both; 
+    /* animation-delay: 0.2s;  */
+  }
+  @keyframes showIn {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .sendNewMessage {
+    background-color: #dff0f7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  .sendNewMessage button {
+    width: 36px;
+    height: 36px;
+    background-color: #ecefff;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #4665ff;
+    padding: 0;
+    border-radius: 5px;
+    line-height: 36px;
+    transition: all 0.3s cubic-bezier(0.88, 0.19, 0.37, 1.11);
+  }
+  .sendNewMessage .icon:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+
+  .sendNewMessage input {
+    flex-grow: 1;
+    padding: 0 15px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+  #sendMsgBtn {
+    background-color: #3b5bfe;
+    color: #fff;
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+
