@@ -17,15 +17,22 @@ import Favorite from '../pages/Favorite';
 //<DatingMode />
 // <Profile />
 const App = () => {
-  return (
-    <Provider store={store}>
-      <Navbar />
-      <Profile />
-    </Provider>
-  )
-}
+    return (
+      <Provider store={store}>
 
-{
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<LoginSignup />} />
+            <Route path="/favorite" element={<Favorite />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/dating" element={<DatingMode />} />
+          </Routes>
+
+      </Provider>
+    );
+  }
+
+
   /* <Routes>
                 <Route path="/" element={<LoginSignup />}/>
                 <Route path='/favorite' element={<Favorite />} />
@@ -34,6 +41,6 @@ const App = () => {
             </Routes>
         </Provider>
     )
-}
+} */
 
 export default App

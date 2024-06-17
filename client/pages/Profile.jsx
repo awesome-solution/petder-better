@@ -54,18 +54,24 @@ const Profile = ({ onUpdateProfiles }) => {
     const fetchUserData = async () => {
       try {
         // replace the endpoint here to get user after signing up!!!
-        // GET method
-        const response = await axios.get(
-          'http://localhost:3000/api/user/user:id',
-          {
-            // headers // json
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-          }
-        )
-        setUser(response.data) // call setUser
+        // GET method 
+
+        // uncomment these code black //
+        // const response = await axios.get('http://localhost:3000/api/user/user:id',{
+        //     // headers // json
+        //     headers: {
+        //       Accept: 'application/json',
+        //       'Content-Type': 'application/json',
+        //     },
+        //   }
+        // )
+        // setUser(response.data) // call setUser
+        setUser({
+            userId: 1,
+            
+            username: "demo",
+            email: "demo@test.com",
+          })
 
         // handle error
       } catch (error) {
