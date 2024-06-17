@@ -18,9 +18,11 @@ const Navbar = () => {
 
   return (
     <nav className="nav">
+      <Link to ="/profile">
       <div className="nav-logo">
         <img src={logo} alt="logo" />
       </div>
+      </Link>
       <div className="nav-menu">
         <ul>
           <li>

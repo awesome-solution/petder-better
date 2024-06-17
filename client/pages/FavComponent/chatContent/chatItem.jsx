@@ -6,7 +6,7 @@ const ChatItem = ({msg, user, image}) => {
 
     return (
         <div
-            style={{ animationDelay: `0.8s` }}
+            style={{ animationDelay: `0.1s` }}
             className={`chat__item ${user ? user : ""}`}
         >   
         {user === "me"? (

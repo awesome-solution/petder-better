@@ -56,7 +56,7 @@
       1.11
     ); 
     animation-fill-mode: both; 
-    animation-delay: 0.2s; 
+    /* animation-delay: 0.2s;  */
   }
   @keyframes showIn {
     0% {

@@ -30,6 +30,7 @@ const LoginSignup = () => {
 
   // login
   const login = async () => {
+    setError('');
     let responseData;
     console.log("formData", formData);
     await fetch("http://localhost:3000/api/login", {
