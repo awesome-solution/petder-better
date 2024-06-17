@@ -1,16 +1,18 @@
-import './Navbar.css';
-import React from 'react';
-import logo from '../../public/icon.png';
-import { useSelector, useDispatch } from 'react-redux';
-import { setAuthView, logout } from '../../src/Redux/action';
-import { Link } from 'react-router-dom';
+import "./Navbar.css";
+import React from "react";
+import logo from "../../public/icon.png";
+import { useSelector, useDispatch } from "react-redux";
+import { setAuthView, logout } from "../../src/Redux/action";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);  // Assuming this is the state to check if logged in
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
 
   const handleLogOut = () => {
-    dispatch(logout()); // Dispatch a logout action
+    dispatch(logout());
+    navigate("/"); // Navigate to home page after logout
   };
 
   return (
@@ -31,7 +33,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/dating" className="link">
+            <Link to="/Dating" className="link">
               Dating Mode
             </Link>
           </li>
@@ -44,18 +46,35 @@ const Navbar = () => {
           )}
         </ul>
       </div>
-      {isLoggedIn ? (
+
+      {user ? (
+        // If user is logged in, show Log Out button
         <div className="nav-button">
           <button className="btn" id="logOutBtn" onClick={handleLogOut}>
             Log Out
           </button>
         </div>
       ) : (
+        // If user is not logged in, show Login and Sign Up buttons
         <div className="nav-button">
-          <button className="btn" id="loginBtn" onClick={() => dispatch(setAuthView('Login'))}>
+          <button
+            className="btn"
+            id="loginBtn"
+            onClick={() => {
+              dispatch(setAuthView("Login"));
+              navigate("/");
+            }}
+          >
             Login
           </button>
-          <button className="btn" id="signBtn" onClick={() => dispatch(setAuthView('SignUp'))}>
+          <button
+            className="btn"
+            id="signBtn"
+            onClick={() => {
+              dispatch(setAuthView("SignUp"));
+              navigate("/");
+            }}
+          >
             Sign Up
           </button>
         </div>

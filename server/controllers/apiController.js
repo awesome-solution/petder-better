@@ -3,8 +3,19 @@ const db = require('../db');
 const apiController = {};
 
 apiController.getBreedsList = async (req, res, next) => {
+    const { speciesId } = req.query;
+    console.log('speciesId', speciesId);
+
+    if(!speciesId) {
+        return next({
+            log: 'Error in apiController.getBreedsList, speciesId is required',
+            message: { err: 'Species ID is required to fetch breeds' },
+            status: 400
+        });
+    }
+
     try {
-        const result = await db.query('SELECT * from breeds');
+        const result = await db.query('SELECT * FROM breeds WHERE species_id = $1', [speciesId]);
         console.log('RESULT: ', result);
         res.locals.breedsList = result.rows;
         return next();

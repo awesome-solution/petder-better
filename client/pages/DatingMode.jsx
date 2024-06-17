@@ -12,7 +12,6 @@ const DatingMode = () => {
   const [loading, setLoading] = useState(false)
   // handel error
   const [error, setError] = useState(null)
-
   useEffect(() => {
     // Fetch pet profiles from the API
     const fetchPets = async () => {
@@ -60,21 +59,17 @@ const DatingMode = () => {
       }
       setLoading(false)
     }
-
     fetchPets()
   }, [])
-
   // function handle next profile in coming
   const handleNextProfile = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % petProfiles.length)
   }
-
   const handlePreviousProfile = () => {
     setCurrentIndex(
       (prevIndex) => (prevIndex - 1 + petProfiles.length) % petProfiles.length
     )
   }
-
   // like function
   const handleLike = async () => {
     // POST to /like then fav page req
@@ -88,7 +83,6 @@ const DatingMode = () => {
         userID: userId,
         petID: petId,
       })
-
       console.log('Favorite added: -->', response.data)
       // then call the next profile in the petProfile array of obj
       handleNextProfile()
@@ -96,7 +90,6 @@ const DatingMode = () => {
       console.error('Error adding favorite:', error)
     }
   }
-
   //unlike
   // if user cliked unlike button
   // first not suppose to show that pet profile again
@@ -113,10 +106,8 @@ const DatingMode = () => {
       console.error('Error unliking profile:', error)
     }
   }
-
   if (loading) return <p>Loading...</p>
   if (error) return <p>{error}</p>
-
   return (
     // if nothing available in the meantime
     // render 'no pet available'
@@ -186,5 +177,4 @@ const DatingMode = () => {
     </div>
   )
 }
-
-export default DatingMode
+export default DatingMode;
