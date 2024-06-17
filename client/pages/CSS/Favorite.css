@@ -1,0 +1,21 @@
+*{
+    box-sizing:border-box;
+}
+
+html, body {
+    height: 90%;
+}
+
+.__main {
+    max-width: 90%;
+    margin: auto;
+    width: 100%;
+    background-color: #fff;
+    min-height: 75vh;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    padding-left: 0;
+    margin-top: 150px;
+}
+

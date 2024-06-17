@@ -25,9 +25,5 @@ const App = () => {
         </Provider>
     )
 }
-{/* <Navbar />
-            <Routes>
-                <Route path="/" element={<LoginSignup />}/>
-            </Routes> */}
 
 export default App;
