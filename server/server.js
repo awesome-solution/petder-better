@@ -45,6 +45,7 @@ apiRouter.post('/login', authController.getUser, (req, res) => {
 
 //http://localhost:3000/api/login
 apiRouter.post('/signup', authController.createUser, (req, res) => {
+  console.log('res.locals.user: ', res.locals.user);
   return res.status(200).json(res.locals.user)
 })
 
