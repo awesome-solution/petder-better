@@ -109,21 +109,20 @@ header {
 
 @media (max-width: 1024px) {
     .wrapper {
-        justify-content: center; /* 水平居中 */
+        justify-content: center; 
         
     }
     .form-box {
-        margin: 0 auto; /* 自动边距实现居中 */
+        margin: 0 auto; 
         margin-top: 200px;
     }
 }
 
-/* 大屏幕，屏幕宽度大于1024px时，右对齐 */
 @media (min-width: 1025px) {
     .wrapper {
-        justify-content: flex-end; /* 水平靠右对齐 */
+        justify-content: flex-end; 
     }
     .form-box {
-        margin-right: 50px; /* 靠右间距 */
+        margin-right: 50px; 
     }
 }

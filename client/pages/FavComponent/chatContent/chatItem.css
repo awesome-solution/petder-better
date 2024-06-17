@@ -1,0 +1,29 @@
+.me {
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.me_message {
+    background-color: #89cff0;
+    color: black;
+    padding: 10px;
+    border-radius: 10px 10px 10px 0; 
+    margin-bottom: 10px;
+}
+
+.other {
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.other_message {
+    background-color: pink;
+    color: black;
+    padding: 10px;
+    border-radius: 10px 10px 0 10px; 
+    margin-bottom: 10px;
+}
