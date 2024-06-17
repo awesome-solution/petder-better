@@ -1,12 +1,14 @@
 import image from '../../public/test1.png';
 
 const initialState = {
-    // user: {
-    //     "userId": 1,
-    //     "userName": "Aria",
-    //     "image": image},
+    user: {},
     authView: "Login",
   };
+
+  // {
+  //   "userId": 1,
+  //   "userName": "Aria",
+  //   "image": image},
   
   const authReducer = (state = initialState, action) => {
     switch (action.type) {
