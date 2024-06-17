@@ -79,11 +79,11 @@ const Profile = ({ onUpdateProfiles }) => {
   // pet creating profile // in the /profile
   useEffect(() => {
     const fetchPetProfiles = async () => {
-        setUser(userContext.userId)
+        // setUser(userContext.userId)
       try {
         // POST method for creating the new pet profile
         // replace with your API endpoint
-        const response = await axios.post('http://localhost:3000/pet/${userId}') // <= change!!!
+        const response = await axios.post(`http://localhost:3000/pet/${userContext.userId}`) // <= change!!!
         setPetProfiles(response.data) // if not an array of nested obj => setPetProfiles([response.data]);
       } catch (error) {
         console.error('Error fetching pet profiles:', error)
@@ -200,13 +200,25 @@ const Profile = ({ onUpdateProfiles }) => {
             formData.append('picture', picture);
         }
     
-        console.log('FormData values: -->', Array.from(formData.entries()));
+        console.log('FormData values: -->',formData, Array.from(formData.entries()));
         try {
-          const response = await axios.post(`http://localhost:3000/pet/${userId}`, formData);
+          // const response = await axios.post(`http://localhost:3000/pet/${userId}`, formData);
+
+          const response = await axios.post(`http://localhost:3000/pet/${userId}`, {
+            'name': pet.name,
+            'color': pet.color,
+            'size': pet.size,
+            'species_id': pet.species_id,
+            'breed_id': pet.breed_id,
+            'gender': pet.gender,
+            'neutering': pet.neutering,
+            'medical_records': pet.medical_records,
+            'description': pet.description,
+          });
            
             console.log('Pet profile created:', response.data);
-            fetchPetProfiles(); // Refresh pet profiles after creation
-            onUpdateProfiles(); // Notify parent component about the update
+            // fetchPetProfiles(); // Refresh pet profiles after creation
+            // onUpdateProfiles(); // Notify parent component about the update
         } catch (error) {
             console.error('Error creating pet profile:', error);
         }
