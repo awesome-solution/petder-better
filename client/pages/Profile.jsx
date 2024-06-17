@@ -37,6 +37,8 @@ const Profile = ({ onUpdateProfiles }) => {
   const [species, setSpecies] = useState([]);
   const [breeds, setBreeds] = useState([]);
   const [selectedSpecies, setSelectedSpecies] = useState(7);
+  // const [newPetData, setNewPetData] = useState({})
+  // const [petEditing, setPetEditing] = useState(false)
 
   const userContext = useSelector(state => state.auth.user); //<= uncomment
   console.log('user', userContext);
@@ -132,6 +134,13 @@ const Profile = ({ onUpdateProfiles }) => {
     // update the user data state
     setNewUserData({ ...user })
   }
+ // function for edit button on the pet profile
+  // const handleEditPet = (pet) => {
+  //   setPetEditing(true); 
+  //   setNewPetData(pet); 
+  //   console.log('editPet -->' pet)
+  // }
+
   // handle cancel button if user doesn't want to edit anymore
   const handleCancelEdit = () => {
     //  const [editing, setEditing] = useState(false)
@@ -251,7 +260,8 @@ const Profile = ({ onUpdateProfiles }) => {
 //       console.error('Error creating pet profile:', error)
 //     }
 //   }
-
+    
+  
   return (
     <div className="profile-container">
       <div className="pet-profile-container">
@@ -261,6 +271,7 @@ const Profile = ({ onUpdateProfiles }) => {
             type="file"
             onChange={handleImageChange}
             onClick={(e) => console.log('Input clicked')}
+            id='grey'
           />
 
           {preview && (
@@ -275,6 +286,7 @@ const Profile = ({ onUpdateProfiles }) => {
               value={pet.name}
               placeholder="Pet Name"
               onChange={handleInputChange}
+              id='grey'
             />
             {/* <input
               type="text"
@@ -289,6 +301,7 @@ const Profile = ({ onUpdateProfiles }) => {
               value={pet.color}
               onChange={handleInputChange}
               placeholder="Color"
+              id='grey'
             />
             {/* <input
               type="text"
@@ -298,11 +311,12 @@ const Profile = ({ onUpdateProfiles }) => {
               placeholder="Weight"
             /> */}
             <input
-            type="text"
-            name="size"
-            value={pet.size}
-            placeholder="Size"
-            onChange={handleInputChange}
+              type="text"
+              name="size"
+              value={pet.size}
+              placeholder="Size"
+              onChange={handleInputChange}
+              id='grey'
             />
             {/* <select
               name="species_id"
@@ -351,10 +365,11 @@ const Profile = ({ onUpdateProfiles }) => {
               value={pet.gender}
               onChange={handleInputChange}
               className="dropdown-content"
+              
             >
               {/* <option value="">Gender</option> */}
-              <option value="boy">Boy</option>
-              <option value="girl">Girl</option>
+              <option className='grey' value="boy">Boy</option>
+              <option className='grey' value="girl">Girl</option>
             </select>
 
             <label>
@@ -371,6 +386,7 @@ const Profile = ({ onUpdateProfiles }) => {
 
             <input
               name="medical_records"
+              id='grey'
               value={pet.medical_records}
               onChange={handleInputChange}
               placeholder="Medical Records"
@@ -378,6 +394,7 @@ const Profile = ({ onUpdateProfiles }) => {
 
             <input
               name="description"
+              id='grey'
               value={pet.description}
               onChange={handleInputChange}
               placeholder="Description"
@@ -387,9 +404,11 @@ const Profile = ({ onUpdateProfiles }) => {
           <button className="btn-profile" type="submit">
             Create Profile
           </button>
-          <button className="edit-btn" type="button">
+          <div key={pet.id}>
+          <button className="edit-btn" type="button" onClick={()=> handleEditPet(pet)}>
             Edit
           </button>
+          </div>
           <button className="delete-btn" type="button">
             Delete
           </button>
