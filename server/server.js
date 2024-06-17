@@ -62,9 +62,9 @@ apiRouter.get('/species',
   }
 )
 
-// router.get('/potential-pets/:userId', apiController.getPotentialPets, (req, res) => {
-//   res.status(200).json(res.locals.potentialPets);
-// });
+apiRouter.get('/potential-pets/:userId', apiController.getPotentialPets, (req, res) => {
+  res.status(200).json(res.locals.potentialPets);
+});
 
 // http://localhost:3000/users/
 app.get('/users', async (req, res) => {

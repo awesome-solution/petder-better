@@ -10,6 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
 
+  //when we click on log out button, the state will be change to logout
   const handleLogOut = () => {
     dispatch(logout());
     navigate("/"); // Navigate to home page after logout
@@ -28,22 +29,15 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/profile" className="link">
-              Profile
+            <Link to="/search" className="link">
+              Search
             </Link>
           </li>
           <li>
-            <Link to="/Dating" className="link">
+            <Link to="/datingmode" className="link">
               Dating Mode
             </Link>
           </li>
-          {isLoggedIn && (
-            <li>
-              <Link to="/profile" className="link">
-                Profile
-              </Link>
-            </li>
-          )}
         </ul>
       </div>
 
