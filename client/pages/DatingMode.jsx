@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-// import axios from "axios";
-import './CSS/Profile.css';
-import PetProfile from './PetProfile'; // Import PetProfile component
-import UserProfile from './UserProfile'; // Import UserProfile component
+import axios from "axios";
+import './CSS/DatingMode.css';
+// import PetProfile from './PetProfile'; // Import PetProfile component
+// import UserProfile from './UserProfile'; // Import UserProfile component
 
 const DatingMode = () => {
     const [petProfiles, setPetProfiles] = useState([]);
@@ -15,8 +15,33 @@ const DatingMode = () => {
         const fetchPets = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('http://localhost:3000/api/potential-pets'); // Make sure the endpoint is correct
-                setPetProfiles(response.data);
+                // const response = await axios.get('http://localhost:3000/api/potential-pets'); // Make sure the endpoint is correct
+                // setPetProfiles(response.data);
+                setPetProfiles([{
+                    "name": "Banana",
+                    "color": "Black",
+                    "size": "Big",
+                    "species_id": 7,
+                    "breed_id": 1,
+                    "gender": "Male",
+                    "neutering": true,
+                    "medical_records": "None",
+                    "picture": "",
+                    "description": "lovely"
+                },
+                {
+                    "name": "Aple",
+                    "color": "Black",
+                    "size": "Big",
+                    "species_id": 7,
+                    "breed_id": 1,
+                    "gender": "Male",
+                    "neutering": true,
+                    "medical_records": "None",
+                    "picture": "",
+                    "description": "lovely"
+                }
+            ])
                 setError(null);
             } catch (error) {
                 console.error('Error fetching pet profiles:', error);
@@ -47,30 +72,30 @@ const DatingMode = () => {
     // };
 
     // like
-    // const handleLike = async () => {
-    //     try {
-    //         // Assuming `userId` is available in the component's state or from a global state/store
-    //         const userId = 'currentUser_Id'; // This should come from user authentication context or state
-    //         const petId = petProfiles[currentIndex].id;
-    //         const response = await axios.post('/api/favorite', { userID: userId, petID: petId });
+    const handleLike = async () => {
+        try {
+            // Assuming `userId` is available in the component's state or from a global state/store
+            const userId = 'currentUser_Id'; // This should come from user authentication context or state
+            const petId = petProfiles[currentIndex].id;
+            const response = await axios.post('/api/favorite', { userID: userId, petID: petId });
     
-    //         console.log('Favorite added:', response.data);
-    //         handleNextProfile();
-    //     } catch (error) {
-    //         console.error('Error adding favorite:', error);
-    //     }
-    // };
+            console.log('Favorite added:', response.data);
+            handleNextProfile();
+        } catch (error) {
+            console.error('Error adding favorite:', error);
+        }
+    };
 
-    // //unlike
-    // const handleUnlike = async () => {
-    //     try {
-    //         const response = await axios.post('/api/unlike', { petId: petProfiles[currentIndex].id });
-    //         console.log('Unliked:', response.data);
-    //         handleNextProfile();
-    //     } catch (error) {
-    //         console.error('Error unliking profile:', error);
-    //     }
-    // };
+    //unlike
+    const handleUnlike = async () => {
+        try {
+            const response = await axios.post('/api/unlike', { petId: petProfiles[currentIndex].id });
+            console.log('Unliked:', response.data);
+            handleNextProfile();
+        } catch (error) {
+            console.error('Error unliking profile:', error);
+        }
+    };
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
