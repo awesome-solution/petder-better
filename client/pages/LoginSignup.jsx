@@ -54,7 +54,7 @@ const LoginSignup = () => {
     console.log("responseData", responseData)
     if (responseData.success) {
       dispatch(authSuccess(responseData.data));
-      navigate("/datingmode");
+      navigate("/Dating");
     } else {
       setError("Invalid username or password."); // Handle response error
     }
