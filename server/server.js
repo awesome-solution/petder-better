@@ -50,9 +50,12 @@ app.get('/', (req, res) => {
 // )
 
 //OAUTH callback route (after initial GET to GITHUB)
-apiRouter.get ('/oauth/token', authController.oauthToken, 
+apiRouter.get ('/oauth/token', authController.oauthToken, authController.tokenX,
 (req, res) => {
   console.log ("got out of /oauth/token middleware")
+  // console.log (res.locals.token)
+  
+  return res.status(200).redirect('http://localhost:8080/dating');
 })
 
 //http://localhost:3000/api/signup

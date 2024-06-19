@@ -91,7 +91,7 @@ oauthCoupon: async (req, res, next) => {
   axios.get ('https://github.com/login/oauth/authorize', {
     params: {
       client_id: '0v23li7PMcw4dGNJZtDW',
-      redirect_uri: 'http://localhost:3000/api/oauth/token',
+      redirect_uri: 'http://127.0.0.1:3000/api/oauth/token',
       state: '1234567891234567'
     }
   })
@@ -130,30 +130,80 @@ oauthCoupon: async (req, res, next) => {
 // }
 
 //redeem authcoupn for token
-oauthToken: async (req, res, next) => {
+// oauthToken: async (req, res, next) => {
 
-  const client_id = '0v23li7PMcw4dGNJZtDW'
-  const redirect_uri = 'http://localhost:3000/api/oauth/token';
-  const state = '1234567891234567';
+//   const client_id = '0v23li7PMcw4dGNJZtDW'
+//   const redirect_uri = 'http://localhost:3000/api/oauth/token';
+//   const state = '1234567891234567';
 
-  const code = req.query.code
-  console.log ('code secured', code)
-  axios.post ('https://github.com/login/oauth/access_token',
-      {
-        client_id: client_id,
-        client_secret: '5fa735bb874d774ccb7b403739a96032f4ef5664',
-        code: code,
-        redirect_uri: 'http://localhost:3000/api/oauth/token',
-        state: '1234567891234567'
-      }
-    )
-    .then ((data) => {
-      const token = data.data.access_token
-      console.log (token)
-      return next()
-    })
-    .catch (next(err))
-  }
+//   const code = req.query.code
+//   console.log ('code secured', code)
+//   axios.post ('https://github.com/login/oauth/access_token',
+//       {
+//         client_id: client_id,
+//         client_secret: '5fa735bb874d774ccb7b403739a96032f4ef5664',
+//         code: code,
+//         redirect_uri: 'http://localhost:3000/api/oauth/token',
+//         state: '1234567891234567'
+//       }
+//     )
+//     .then ((data) => {
+//       const token = data.data.access_token
+//       console.log (token)
+//       return next()
+//     })
+//     .catch (next(err))
+//   }
 
-}
+
+  // Redeem auth coupon for token
+  oauthToken: async (req, res, next) => {
+    const client_id = '0v23li7PMcw4dGNJZtDW';
+    const client_secret = '5fa735bb874d774ccb7b403739a96032f4ef5664';
+    const code = req.query.code;
+    
+    console.log('code secured', code);
+
+    // if (!code) {
+    //   console.log ("No code in Github Res.")
+    //   return res.status(400).send ('Code not found')
+    // }
+      const params = "?client_id=" + client_id + "&client_secret=" + client_secret + "&code=" + req.query.code;
+
+      await fetch("https://github.com/login/oauth/access_token" + params, {
+        method: "POST",
+        header: {
+          "Accept": "application/json"
+        }
+      }).then((response) => {
+        console.log('inside post request')
+        res.locals.token = response;
+        // console.log('token', res.locals.token)
+        return next()
+      })
+      .catch(err => {
+        console.log ("error in oAuthToken")
+        return next (err)
+      });
+    },
+
+    tokenX: async (req, res, next) => {
+      req.get("Authorization");
+      await fetch("https://api.github.com/user", {
+        method: "GET",
+        headers: {
+          "Authorization" : req.get("Authorization")
+        }
+      }).then((response) => {
+        console.log('in tokenX')
+        res.locals.token = response;
+        return next()
+      }).catch(err => {
+        console.log ("error in token X")
+        return next(err)
+      });
+    },
+  };
+
+
 module.exports = authController;

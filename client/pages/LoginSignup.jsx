@@ -108,13 +108,24 @@ const LoginSignup = () => {
 // }
 
 const oauthLogin = () => {
-  const client_id = '0v23li7PMcw4dGNJZtDW'
-  const redirect_uri = 'http://localhost:3000/api/oauth/token';
+  const client_id = 'Ov23li7PMcw4dGNJZtDW';
+  const redirect_uri = 'http://127.0.0.1:3000/api/oauth/token';
   const state = '1234567891234567';
-  const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state}`;
-  window.location.href = githubAuthUrl
+  const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=`
+   window.location.assign("https://github.com/login/oauth/authorize?client_id=" + client_id);
 }
-//https://github.com/login/oauth/authorize?client_id=${client_id}&response_type=code&scope=repo&redirect_uri=${window.location.origin}/integrations/github/oauth2/callback&state=${state}`
+// https://github.com/login/oauth/authorize?client_id=${client_id}&response_type=code&scope=repo&redirect_uri=${window.location.origin}/integrations/github/oauth2/callback&state=${state}`
+
+// https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000%2Fapi%2Foauth%2Ftoken from error message
+
+// https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state} from website
+
+// https://github.com/login/oauth/authorize from github docs
+
+// https://github.com/login/oauth/authorize?client_id=${client_id}&scope=user from feathery
+
+// https://github.com/login/oauth/authorize?client_id=0v23li7PMcw4dGNJZtDW&redirect_uri=http://127.0.0.1:3000/api/oauth/token&scope=user
+
 
   return (
         <div className="wrapper">
