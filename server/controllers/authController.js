@@ -1,6 +1,7 @@
 
 const db = require('../db.js')
 const bcrypt = require('bcrypt')
+const axios = require('axios')
 
 const saltRounds = 10
 
@@ -55,7 +56,7 @@ const authController = {
     const { username, email, password } = req.body;
     if(!username || !password || !email || username.trim() === '' || password.trim() === '' || email.trim() === '') return next({
       log: 'Error with signup',
-      message: { err: 'All feilds have to fill up' },
+      message: { err: 'All fields have to fill up' },
     })
     const getUser = `SELECT * FROM users WHERE username = '${username}'`
     const check = await db.query(getUser)
@@ -84,6 +85,75 @@ const authController = {
         return next(err)
       })
   },
-}
 
+//oauth middleware
+oauthCoupon: async (req, res, next) => {
+  axios.get ('https://github.com/login/oauth/authorize', {
+    params: {
+      client_id: '0v23li7PMcw4dGNJZtDW',
+      redirect_uri: 'http://localhost:3000/api/oauth/token',
+      state: '1234567891234567'
+    }
+  })
+  .then((data) => {    
+//  console.log (req.query)
+
+    // console.log(data.redirected)
+    // res.locals.authCoupon = data.url 
+
+    return next ()
+  })
+  .catch(err => {
+    return next(err)
+  })
+},
+
+// try{
+  // console.log('clicking oAuth')
+  // const client_id = 'Ov23li7PMcw4dGNJZtDW'
+  // const callbackUrl = 'http://localhost:8080/dating'
+
+//   const state = crypto.randomBytes(16).toString("hex");
+//   localStorage.setItem("latestCSRFToken", state);
+  
+//   const oAuthLink = `https://github.com/login/oauth/authorize?client_id=${client_id}&response_type=code&scope=repo&redirect_uri=${callbackUrl}/integrations/github/oauth2/callback&state=${state}`;
+//  window.location.assing(oAuthLink)
+//await fetch(oAuthLink, {method: 'GET'}) 
+// .then((response) => {
+//   console.log(response)
+  // redirect(response.json)
+//   }
+// }
+// catch {
+//   console.error(error)
+// }
+// }
+
+//redeem authcoupn for token
+oauthToken: async (req, res, next) => {
+
+  const client_id = '0v23li7PMcw4dGNJZtDW'
+  const redirect_uri = 'http://localhost:3000/api/oauth/token';
+  const state = '1234567891234567';
+
+  const code = req.query.code
+  console.log ('code secured', code)
+  axios.post ('https://github.com/login/oauth/access_token',
+      {
+        client_id: client_id,
+        client_secret: '5fa735bb874d774ccb7b403739a96032f4ef5664',
+        code: code,
+        redirect_uri: 'http://localhost:3000/api/oauth/token',
+        state: '1234567891234567'
+      }
+    )
+    .then ((data) => {
+      const token = data.data.access_token
+      console.log (token)
+      return next()
+    })
+    .catch (next(err))
+  }
+
+}
 module.exports = authController;
