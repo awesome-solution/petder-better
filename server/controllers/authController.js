@@ -101,7 +101,7 @@ const authController = {
       .get('https://github.com/login/oauth/authorize', {
         params: {
           client_id: '0v23li7PMcw4dGNJZtDW',
-          redirect_uri: 'http://127.0.0.1:3000/api/oauth/token',
+          redirect_uri: 'http://localhost:3000/api/oauth/token',
           state: '1234567891234567',
         },
       })
