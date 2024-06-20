@@ -3,6 +3,8 @@ import "./CSS/LoginSignup.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setAuthView, authSuccess } from "../src/Redux/action";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
+
 
 const LoginSignup = () => {
   const dispatch = useDispatch();
@@ -54,7 +56,7 @@ const LoginSignup = () => {
     console.log("responseData", responseData)
     if (responseData.success) {
       dispatch(authSuccess(responseData.data));
-      navigate("/datingmode");
+      navigate("/Dating");
     } else {
       setError("Invalid username or password."); // Handle response error
     }
@@ -93,6 +95,38 @@ const LoginSignup = () => {
     }
   };
 
+
+//oauth logic
+// oAuth client_id: Ov23li7PMcw4dGNJZtDW
+//oAuth client secret: 5fa735bb874d774ccb7b403739a96032f4ef5664
+// const oauthLogin = async () => {
+
+//  axios.get('http://localhost:3000/api/oauth')
+//  .then ((data) => console.log (data))
+//  .catch (console.error(error))
+
+// }
+
+const oauthLogin = () => {
+  const client_id = 'Ov23li7PMcw4dGNJZtDW';
+  const redirect_uri = 'http://127.0.0.1:3000/api/oauth/token';
+  const state = '1234567891234567';
+  const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=`
+   window.location.assign("https://github.com/login/oauth/authorize?client_id=" + client_id);
+}
+// https://github.com/login/oauth/authorize?client_id=${client_id}&response_type=code&scope=repo&redirect_uri=${window.location.origin}/integrations/github/oauth2/callback&state=${state}`
+
+// https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000%2Fapi%2Foauth%2Ftoken from error message
+
+// https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state} from website
+
+// https://github.com/login/oauth/authorize from github docs
+
+// https://github.com/login/oauth/authorize?client_id=${client_id}&scope=user from feathery
+
+// https://github.com/login/oauth/authorize?client_id=0v23li7PMcw4dGNJZtDW&redirect_uri=http://127.0.0.1:3000/api/oauth/token&scope=user
+
+
   return (
         <div className="wrapper">
     <div className="form-box">
@@ -101,6 +135,7 @@ const LoginSignup = () => {
           <div className="top">
             <div className="oneLine">
               <p>Already have an account?</p>
+              <span onClick={() => oauthLogin()}>OAuth</span>
               <span onClick={() => dispatch(setAuthView("Login"))}>Login</span>
             </div>
             <header>Sign Up</header>
@@ -109,6 +144,7 @@ const LoginSignup = () => {
           <div className="top">
             <div className="oneLine">
               <p>Create a new Account</p>
+              <span onClick={() => oauthLogin()}>OAuth</span>
               <span onClick={() => dispatch(setAuthView("SignUp"))}>Sign Up</span>
             </div>
             <header>Login</header>

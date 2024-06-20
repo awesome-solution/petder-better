@@ -36,6 +36,28 @@ app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../client/src/index.html'));
 })
 
+
+//oauth path : localhost:3000/api/oauth
+// apiRouter.get ('/oauth',
+//   authController.oauthCoupon, 
+  
+//   (req, res) => {
+//     // redirect(res.locals.authCoupon)
+//     console.log('exited middleware, now in server.js')
+//     console.log (req)
+//     return res.status(200).json(res.locals.authCoupon)
+//   }
+// )
+
+//OAUTH callback route (after initial GET to GITHUB)
+apiRouter.get ('/oauth/token', authController.oauthToken, authController.tokenX,
+(req, res) => {
+  console.log ("got out of /oauth/token middleware")
+  // console.log (res.locals.token)
+  
+  return res.status(200).redirect('http://localhost:8080/dating');
+})
+
 //http://localhost:3000/api/signup
 apiRouter.post('/login', authController.getUser, (req, res) => {
   console.log('res.locals.user: ', res.locals.user);
